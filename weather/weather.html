@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Weather</title>
+    <link rel="stylesheet" href="css/weather.css">
+  </head>
+  <body>
+	<div id="inputs">
+    <h1>WEATHER</h1>
+    <p>Application developed in DART languaje, connected to <a href="http://www.worldweatheronline.com/" class="links">World Weather Online</a> to provide the weather forecast from the selected place.</p>
+	<div class="weather">
+		<form name="formulary" id="formulary">
+			Introduce a city:
+			<div id="city_text">
+				<input type="text" name="city" id="city" />
+			</div>
+			<div id="send_button">
+				<input type="submit" id="send" value="Search" />
+			</div>
+		</form>
+	</div>
+	</div>
+	<br>
+	
+	<div id="content"> <!--style="display:none;"-->
+		<div id="result">
+		
+			<div id="current_condition">
+				<div class="title">
+					<div id="title1">CURRENT CONDITION</div>  
+					<div class="time">
+						<div class="date">Observation Time: </div><div class="input" id="observationTime"></div>
+					</div>
+				</div>
+				<div class="info">
+					<div id="column1">
+						<div id="image1"></div>
+						<div class="infoColumn">
+							<div class="field">Description: </div><div class="input" id="description1"></div>
+						</div>
+						<div class="infoColumn">
+							<div class="field">Temperature: </div>
+								<div class="input" id="tCelsius"></div><div class="slash"> / </div><div class="input" id="tFarenheit"></div>
+						</div>
+					</div>
+					<div id="column2">
+						<div class="infoColumn">
+							<div class="field">Humidity: </div><div class="input" id="humidity"></div>
+						</div>
+						<div class="infoColumn">
+							<div class="field">Precipitations: </div><div class="input" id="precipitation1"></div>
+						</div>
+						<div class="infoColumn">
+							<div class="field">Cloudcover: </div><div class="input" id="cloudcover"></div>
+						</div>
+						<div class="infoColumn">
+							<div class="field">Visibility: </div><div class="input" id="visibility"></div>
+						</div>
+					</div>
+					<div id="column3">
+						<div class="infoColumn">
+							<div class="field">Pressure: </div><div class="input" id="pressure"></div>
+						</div>
+						<div class="infoColumn">
+							<div class="field">Wind direction: </div><div class="input" id="windDirectionDegree1"></div><div class="slash">/</div><div class="input" id="windDirection16Point1"></div>
+						</div>
+						<div class="infoColumn"> 
+							<div class="field">Wind speed: </div><div class="input" id="windSpeedkmh1"></div><div class="slash">/</div><div class="input" id="windSpeedMiles1"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p id="separator"></p>
+			
+			<div id="forecast">
+			
+				<div class="forecast" id="forecast_today">
+
+					<div class="title2">
+						<div id="title2">TODAY</div>
+						<div class="time2">  
+							<div class="date2">Date: <div class="input" id="dateToday"></div></div>
+						</div>
+					</div>
+					
+					<div id="today">
+						<div class="row1">
+							<div class="row1_1">
+								<div id="image2"></div>
+								<div class="inputC" id="description2"></div>
+							</div>
+							<div class="row1_2">
+									<div class="fieldC">Min. Temperature: </div>
+									<div class="infoRow">
+										<div class="inputC" id="minTCelsius1"></div><div class="inputC" id="maxTFarenheit1"></div>
+									</div>
+									<div class="fieldC">Max. Temperature: </div>
+									<div class="infoRow">
+										<div class="inputC" id="maxTCelsius1"></div><div class="inputC" id="maxTFarenheit1"></div>
+									</div>
+							</div>
+						</div>
+						<div class="row2">
+							<div class="infoRowL">
+								<div class="field">Precipitations: </div><div class="inputL" id="precipitation2"></div>
+							</div>
+							<div class="infoRowL">
+								<div class="field">Wind direction: </div><div class="inputL" id="windDirectionDegree2"></div><div class="slash">/</div><div class="inputL" id="windDirection16Point2"></div>
+							</div>
+							<div class="infoRowL"> 
+								<div class="field">Wind speed: </div><div class="inputL" id="windSpeedkmh2"></div><div class="slash">/</div><div class="inputL" id="windSpeedMiles2"></div>
+							</div> 
+						</div>
+					</div>
+				</div>
+				
+				<div class="forecast" id="forecast_tomorrow">
+
+					<div class="title2">
+						<div id="title3">TOMORROW</div>
+						<div class="time2">  
+							<div class="date2">Date: <div class="input" id="dateTomorrow"></div></div>
+						</div>
+					</div>
+					
+					<div id="tomorrow">
+						<div class="row1">
+							<div class="row1_1">
+								<div id="image3"></div>
+									<div class="inputC" id="description3"></div>
+							</div>
+							<div class="row1_2">
+									<div class="fieldC">Min. Temperature: </div>
+										<div class="inputC" id="minTCelsius2"></div><div class="inputC" id="maxTFarenheit2"></div>
+									<div class="fieldC">Max. Temperature: </div>
+										<div class="inputC" id="maxTCelsius2"></div><div class="inputC" id="maxTFarenheit2"></div>
+							</div>
+						</div>
+						<div class="row2">
+							<div class="infoRowL">
+								<div class="field">Precipitations: </div><div class="inputL" id="precipitation3"></div>
+							</div>
+							<div class="infoRowL">
+								<div class="field">Wind direction: </div><div class="inputL" id="windDirectionDegree3"></div><div class="slash">/</div><div class="inputL" id="windDirection16Point3"></div>
+							</div>
+							<div class="infoRowL"> 
+								<div class="field">Wind speed: </div><div class="inputL" id="windSpeedkmh3"></div><div class="slash">/</div><div class="inputL" id="windSpeedMiles3"></div>
+							</div> 
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+    <div id="footer">
+    	<p id="text_footer">Open Innovation Laboratory (OIL Lab) - Facultad de Informática Universidad Politécnica de Madrid, FI UPM. 2012</p> 
+    </div>
+    <script type="application/dart" src="dart/weather.dart"></script>
+    <script src="dart/dart.js"></script>
+  </body>
+</html>
