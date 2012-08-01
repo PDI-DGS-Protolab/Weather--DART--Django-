@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="css/weather.css">
   </head>
   <body>
+  <div id="log">
+  	<div id="log_form">
+		<form name="formu_login" id="form_login">
+			<div id="user">User:</div>
+			<div id="user_name">
+				<input type="text" name="user_id" id="user_id" />
+			</div>
+			<div id="pass">Password:</div>
+			<div id="password">
+				<input type="password" id="pass_id" value="" />
+			</div>
+			<div id="login_button">
+				<input type="submit" id="login" value="Log in" />
+			</div>
+	</div>
+	<div id="logout_button" style="display:none;">
+		<input type="button" id="logout" value="Log out" />
+	</div>
+	<div id="logged_user" style="display:none;"></div>
+		</form>
+  </div>
+	<br />
 	<div id="inputs">
     <h1>WEATHER</h1>
     <p>Application developed in DART languaje, connected to <a href="http://www.worldweatheronline.com/" class="links">World Weather Online</a> to provide the weather forecast from the selected place.</p>
@@ -24,8 +46,10 @@
 	</div>
 	<br>
 	
-	<div id="content"> <!--style="display:none;"-->
+	<div id="content" style="display:none;">
 		<div id="result">
+		
+			<div id="city_name"></div>
 		
 			<div id="current_condition">
 				<div class="title">
@@ -36,7 +60,7 @@
 				</div>
 				<div class="info">
 					<div id="column1">
-						<div id="image1"></div>
+						<div id="image1"><img id="img1" /></div>
 						<div class="infoColumn">
 							<div class="field">Description: </div><div class="input" id="description1"></div>
 						</div>
@@ -88,13 +112,13 @@
 					<div id="today">
 						<div class="row1">
 							<div class="row1_1">
-								<div id="image2"></div>
+								<div id="image2"><img id="img2" /></div>
 								<div class="inputC" id="description2"></div>
 							</div>
 							<div class="row1_2">
 									<div class="fieldC">Min. Temperature: </div>
 									<div class="infoRow">
-										<div class="inputC" id="minTCelsius1"></div><div class="inputC" id="maxTFarenheit1"></div>
+										<div class="inputC" id="minTCelsius1"></div><div class="inputC" id="minTFarenheit1"></div>
 									</div>
 									<div class="fieldC">Max. Temperature: </div>
 									<div class="infoRow">
@@ -128,12 +152,12 @@
 					<div id="tomorrow">
 						<div class="row1">
 							<div class="row1_1">
-								<div id="image3"></div>
+								<div id="image3"><img id="img3" /></div>
 									<div class="inputC" id="description3"></div>
 							</div>
 							<div class="row1_2">
 									<div class="fieldC">Min. Temperature: </div>
-										<div class="inputC" id="minTCelsius2"></div><div class="inputC" id="maxTFarenheit2"></div>
+										<div class="inputC" id="minTCelsius2"></div><div class="inputC" id="minTFarenheit2"></div>
 									<div class="fieldC">Max. Temperature: </div>
 										<div class="inputC" id="maxTCelsius2"></div><div class="inputC" id="maxTFarenheit2"></div>
 							</div>
@@ -155,6 +179,10 @@
 			</div>
 		</div>
 	</div>
+	<br>
+	<br>
+	<br>
+	<br>
     <div id="footer">
     	<p id="text_footer">Open Innovation Laboratory (OIL Lab) - Facultad de Informática Universidad Politécnica de Madrid, FI UPM. 2012</p> 
     </div>

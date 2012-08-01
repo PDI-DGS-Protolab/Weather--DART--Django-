@@ -2,6 +2,8 @@ html {
   background: -webkit-gradient(linear, center top, center bottom, from(#04B404), to(#ffffff)); /*for webkit browsers*/
   background: -moz-linear-gradient(top,  #04B404,  #ffffff); /* for firefox */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#04B404', endColorstr='#ffffff'); /*for ie */
+  background-repeat: no repeat;
+  background-attachment:fixed;
   
   height: 100%;
  }
@@ -36,6 +38,97 @@ div{
 #separator{
   line-height:3px;
 }
+
+/* Logging */
+#log{
+  height: 40px;
+  padding: 1px;  
+}
+
+#log_form {
+  float:left;
+  padding: 0;
+  width: 650px;
+  border: none;
+  background: transparent;
+}
+
+#logged_user{
+  width: 110px;
+  height: 20px;
+  border: none;
+  float: right;
+  font-size: 0.8em;
+  text-align: right;
+  font-weight: bold;
+  color: #0B6138;
+}
+
+#user, #pass{
+  width: 60px;
+  text-align: right;
+  font-size: 0.8em;
+  float: left;
+  border: none;
+  border-radius: 0;
+  background: none;  
+}
+
+#user_name, #password {
+  width: 170px;
+  float:left;
+  font-size: 0.8em;
+  border: none;
+  border-radius: 0;
+  vertical-align: text-top;
+  background: none;
+}
+
+#user_id, #pass_id {
+  border-radius: 1.5em;
+  padding: 0.9em;
+  width: 150px;
+  height: 2px;
+  font-size: 0.75em;
+  float: left;
+}
+
+#login_button{
+  border: none;
+  background: none;
+  width: 80px;
+  float: left;
+}
+
+#logout_button{
+  border: none;
+  background: none;
+  width: 60px;
+  float: right;
+}
+
+#login{
+  background: -webkit-gradient(linear, center top, center bottom, from(#2E2E2E), to(#A4A4A4));
+  border-radius: 1em;
+  font-size: 0.7em;
+  font-weight: bold;
+  color: #FFFFFF;
+  width: 60px;
+  height: 22px;
+  float: left;
+}
+
+#logout{
+  background: -webkit-gradient(linear, center top, center bottom, from(#2E2E2E), to(#A4A4A4));
+  border-radius: 1em;
+  font-size: 0.7em;
+  font-weight: bold;
+  color: #FFFFFF;
+  width: 60px;
+  height: 22px;
+  float: right;
+}
+
 
 /* Title of the web */ 
 h1 {
@@ -99,6 +192,15 @@ h1 {
 #result {
   border: none;
   width: 850px;
+}
+
+#city_name{
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: #38610B;
+  width: 700px;
+  border: none;
 }
 
 /* Current condition info*/
@@ -170,9 +272,11 @@ h1 {
 #observationTime{
   width: 260px;
   float: right;
-  text-align: left;
+  text-align: center;
+  font-size: 0.8em;
   padding: 3px;
   border: solid 1px grey;
+  border-radius: 0;
 }
 
 .field{
@@ -188,7 +292,7 @@ h1 {
 }
 
 .input{
-  font-size: 0.8px;
+  font-size: 0.8em;
   font-weight: normal;
   padding: 5px;
   width: 200px;
@@ -221,7 +325,7 @@ h1 {
   height: 13px;
   padding: 3px;
   text-align: right;
-  float: right;
+  float: left;
   border: none;
   background-color: transparent;
 }
@@ -238,7 +342,7 @@ h1 {
 
 #description1, #humidity, #precipitation1, #cloudcover, #visibility, #pressure{
   width: 120px;
-  text-align: right;
+  text-align: left;
   background-color: transparent;
 }
 
@@ -248,7 +352,7 @@ h1 {
 }
 
 #tCelsius, #windDirectionDegree1, #windSpeedkmh1{
-  float: right;
+  float: left;
   background-color: transparent;
 }
 
@@ -351,10 +455,11 @@ h1 {
 #dateToday, #dateTomorrow {
   width: 100px;
   float: right;
-  text-align: left;
-  float: right;
+  text-align: center;
+  font-size: 0.8em;
   padding: 3px;
   border: solid 1px grey;
+  border-radius: 0;
 }
 
 #today, #tomorrow {
@@ -410,23 +515,23 @@ h1 {
 }
 
 .inputC{
-  font-size: 0.8px;
+  font-size: 0.8em;
   font-weight: normal;
   padding: 3px;
   width: 100px;
   height: 13px;
-  text-align: right;
+  text-align: left;
   border: none;
   background-color: transparent;
 }
 
 .inputL{
-  font-size: 0.8px;
+  font-size: 0.8em;
   font-weight: normal;
   padding: 3px;
   width: 200px;
   height: 13px;
-  text-align: right;
+  text-align: left;
   float: right;
 }
 
@@ -455,7 +560,7 @@ h1 {
   float: left; 
   border: none;
   background-color: transparent;
-  text-align: right;
+  text-align: left;
 }
 
 #minTFarenheit1, #minTFarenheit2, #maxTFarenheit1, #maxTFarenheit2{
@@ -463,7 +568,7 @@ h1 {
   float: right;
   border: none;
   background-color: transparent;
-  text-align: right;
+  text-align: left;
 }
 
 #precipitation2, #precipitation3 {
@@ -471,23 +576,31 @@ h1 {
   border: none;
   border: solid 1px transparent;
   background-color: transparent;
-  text-align: right;
+  text-align: left;
 }
 
-#windDirectionDegree2, #windDirectionDegree3, #windDirection16Point2, #windDirection16Point3, #windSpeedkmh2, #windSpeedkmh3, #windSpeedMiles2, #windSpeedMiles3 {
+#windDirectionDegree2, #windDirectionDegree3, #windSpeedkmh2, #windSpeedkmh3 {
   width: 90px;
   border: solid 1px transparent;
   background-color: transparent;
-  text-align: right;
+  text-align: left;
+  float: left;
 }
 
+#windDirection16Point2, #windDirection16Point3, #windSpeedMiles2, #windSpeedMiles3{
+  width: 90px;
+  border: solid 1px transparent;
+  background-color: transparent;
+  text-align: left;
+  float: right;
+}
 
 
 /* Footer */
 #footer {
   margin-left: -20px;
-  padding: 0;
-  width: 100.5%;
+  padding: 5px;
+  width: 105%;
   position: fixed;
   bottom: 0px;
   height: 40px;
