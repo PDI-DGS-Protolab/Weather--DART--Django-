@@ -595,7 +595,6 @@ h1 {
   float: right;
 }
 
-
 /* Footer */
 #footer {
   margin-left: -20px;
@@ -613,8 +612,53 @@ h1 {
 }
 
 #text_footer {
-	width: 700px;
-	margin: 10px auto 0 auto;
-	text_align: center;
+  width: 700px;
+  margin: 10px auto 0 auto;
+  text_align: center;
 }
 
+/* Error windows */
+#error{
+  width: 500px;
+  height: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -250px;
+  margin-top: -75px;
+  padding-top: 2px;
+  padding-bottom: 5px;
+  border: outset 2px #848484;
+  background: -webkit-gradient(linear, center top, center bottom, from(#D8D8D8), to(#ffffff)); 
+}
+
+#error_title{
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  color: red;
+  text-shadow: 0px 1px 1px #1C1C1C;  
+}
+
+#error_text{
+  font-size: 0.9em;
+  padding: 5px;
+  height: 35px;
+}
+
+#close{
+  background: -webkit-gradient(linear, center top, center bottom, from(#2E2E2E), to(#A4A4A4));
+  border-radius: 1em;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #FFFFFF;
+  width: 150px;
+  height: 30px;
+}
+
+#close_button{
+  width: 150px;
+  margin-top: -10px;
+  border: none;
+  padding: 0;
+}
