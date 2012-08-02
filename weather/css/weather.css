@@ -109,6 +109,8 @@ div{
 
 #login{
   background: -webkit-gradient(linear, center top, center bottom, from(#2E2E2E), to(#A4A4A4));
+  background: -moz-linear-gradient(top,  #2E2E2E,  #A4A4A4); /* for firefox */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2E2E2E', endColorstr='#A4A4A4'); /*for ie */
   border-radius: 1em;
   font-size: 0.7em;
   font-weight: bold;
@@ -120,6 +122,8 @@ div{
 
 #logout{
   background: -webkit-gradient(linear, center top, center bottom, from(#2E2E2E), to(#A4A4A4));
+  background: -moz-linear-gradient(top,  #2E2E2E,  #A4A4A4); /* for firefox */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2E2E2E', endColorstr='#A4A4A4'); /*for ie */
   border-radius: 1em;
   font-size: 0.7em;
   font-weight: bold;
@@ -144,6 +148,8 @@ h1 {
 .weather {
   border: outset 1px #848484;
   background: -webkit-gradient(linear, center top, center bottom, from(#D8D8D8), to(#ffffff));
+  background: -moz-linear-gradient(top,  #D8D8D8,  #ffffff); /* for firefox */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#D8D8D8', endColorstr='#ffffff'); /*for ie */
   width: 380px;  
   margin: 0 auto 0 auto;
 }
@@ -175,6 +181,8 @@ h1 {
 
 #send{
   background: -webkit-gradient(linear, center top, center bottom, from(#2E2E2E), to(#A4A4A4));
+  background: -moz-linear-gradient(top,  #2E2E2E,  #A4A4A4); /* for firefox */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2E2E2E', endColorstr='#A4A4A4'); /*for ie */
   border-radius: 1em;
   font-size: 0.9em;
   font-weight: bold;
@@ -230,7 +238,6 @@ h1 {
   margin: 0;
   border: none;
   background-color: transparent;
-  /*background: -webkit-gradient(linear, center top, center bottom, from(#E0F8F7), to(#CEF6F5));*/ 
 }
 
 #title1 {
@@ -241,6 +248,8 @@ h1 {
   padding: 4px;
   border-color: #1D7B25;
   background: -webkit-gradient(linear, center top, center bottom, from(#0B6138), to(#088E13));
+  background: -moz-linear-gradient(top,  #0B6138,  #088E13); /* for firefox */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0B6138', endColorstr='#088E13'); /*for ie */
   color: #90E45E; 
   
 }
@@ -423,6 +432,8 @@ h1 {
   padding: 4px;
   border-color: #1D7B25;
   background: -webkit-gradient(linear, center top, center bottom, from(#0B6138), to(#088E13));
+  background: -moz-linear-gradient(top,  #0B6138,  #088E13); /* for firefox */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0B6138', endColorstr='#088E13'); /*for ie */
   color: #90E45E; 
   
 }
@@ -630,6 +641,8 @@ h1 {
   padding-bottom: 5px;
   border: outset 2px #848484;
   background: -webkit-gradient(linear, center top, center bottom, from(#D8D8D8), to(#ffffff)); 
+  background: -moz-linear-gradient(top,  #D8D8D8,  #ffffff); /* for firefox */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#D8D8D8', endColorstr='#ffffff'); /*for ie */
 }
 
 #error_title{
@@ -648,6 +661,8 @@ h1 {
 
 #close{
   background: -webkit-gradient(linear, center top, center bottom, from(#2E2E2E), to(#A4A4A4));
+  background: -moz-linear-gradient(top,  #2E2E2E,  #A4A4A4); /* for firefox */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2E2E2E', endColorstr='#A4A4A4'); /*for ie */
   border-radius: 1em;
   font-size: 0.9em;
   font-weight: bold;
