@@ -5,6 +5,12 @@ void main() {
   query('#formulary').on.submit.add(newQuery);
   query('#form_login').on.submit.add(login);
   query('#logout').on.click.add(logout);
+  query('#close').on.click.add(hide_error);
+}
+
+void hide_error (event) {
+  DivElement error = query('#error');
+  error.style.display = 'none';
 }
 
 void login(event){
@@ -19,19 +25,26 @@ void login(event){
   
   // Add an event handler to call the onSuccess function when the POST call is successful
   req.on.readyStateChange.add((Event e) {
-    if (req.readyState == XMLHttpRequest.DONE && (req.status == 200)) {
-      DivElement div_loggin = query('#log_form');
-      div_loggin.style.display = 'none';
-      
-      DivElement logged_user = query('#logged_user');
-      logged_user.style.display = '';
-      logged_user.text = user;
-      
-      DivElement div_loggout_button = query('#logout_button');
-      div_loggout_button.style.display = '';
-    } else {
-      print(req.status);
-      print("ERROR DE LOGIN!!!!");
+    if (req.readyState == XMLHttpRequest.DONE) {
+      if (req.status == 200) {
+        DivElement div_loggin = query('#log_form');
+        div_loggin.style.display = 'none';
+        
+        DivElement logged_user = query('#logged_user');
+        logged_user.style.display = '';
+        logged_user.text = user;
+        
+        DivElement div_loggout_button = query('#logout_button');
+        div_loggout_button.style.display = '';
+        DivElement error = query('#error');
+        error.style.display = 'none';
+      } 
+      if (req.status == 401) {
+         print("Error: User/password is incorrect");
+         query('#error_text').text = "User/password is incorrect";
+         DivElement error = query('#error');
+         error.style.display = '';
+      }
     }
   });
 
@@ -61,6 +74,9 @@ void logout(event) {
   
   DivElement div_query = query('#content');
   div_query.style.display = 'none';
+  
+  DivElement error = query('#error');
+  error.style.display = 'none';
 }
 
 void newQuery(event) {
@@ -75,12 +91,27 @@ void newQuery(event) {
   
   // Add an event handler to call the onSuccess function when the POST call is successful
   req.on.readyStateChange.add((Event e) {
-    if (req.readyState == XMLHttpRequest.DONE && (req.status == 200)) {
-      var j = JSON.parse(req.responseText);
-      if (j.containsKey("data") && j["data"].containsKey("error"))
-        print('HELL YEAH');
-      else
-        onSuccess(req);
+    if (req.readyState == XMLHttpRequest.DONE) {
+        if (req.status == 200) {
+          var j = JSON.parse(req.responseText);
+          if (j.containsKey("result_json")) {
+            DivElement error = query('#error');
+            error.style.display = 'none';
+            onSuccess(req);
+          }
+          else {
+            print('Error: City not found');
+            query('#error_text').text = "City not found";
+            DivElement error = query('#error');
+            error.style.display = '';
+          }
+        }
+        if (req.status == 401) {
+          print('Error: User not logged in');
+          query('#error_text').text = "User not logged in";
+          DivElement error = query('#error');
+          error.style.display = '';
+        }
     }
   });
   
@@ -98,9 +129,11 @@ void onSuccess(XMLHttpRequest req) {
   showJson(req);
 }
 
-// Function that shows the desired message in the corresponding element
+// Function that shows the distinct forecast data in the corresponding elements
 void showJson(XMLHttpRequest req) {
   var parsedJSON = JSON.parse(req.responseText)["result_json"];
+  
+  // Current condition
   var currentConditions = parsedJSON["data"]["current_condition"][0];
   query('#observationTime').text = currentConditions["observation_time"];
   query('#description1').text = currentConditions["weatherDesc"][0]["value"];
@@ -118,6 +151,8 @@ void showJson(XMLHttpRequest req) {
   ImageElement image = query('#img1');
   image.src = currentConditions["weatherIconUrl"][0]["value"];
   query('#city_name').text = parsedJSON["data"]["request"][0]["query"];
+  
+  // Today's forecast
   var weatherToday = parsedJSON["data"]["weather"][0];
   query('#dateToday').text = weatherToday["date"];
   query('#description2').text = weatherToday["weatherDesc"][0]["value"];
@@ -134,6 +169,7 @@ void showJson(XMLHttpRequest req) {
   ImageElement image2 = query('#img2');
   image2.src = weatherToday["weatherIconUrl"][0]["value"];
   
+  // Tomorrow's forecast
   var weatherTomorrow = parsedJSON["data"]["weather"][1];
   query('#dateTomorrow').text = weatherTomorrow["date"];
   query('#description3').text = weatherTomorrow["weatherDesc"][0]["value"];
