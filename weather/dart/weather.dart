@@ -1,88 +1,99 @@
 #import('dart:html');
 #import('dart:json');
 
+/** Main function. Intializes all the buttons and fucntions for future use. */
 void main() {
   query('#formulary').on.submit.add(newQuery);
   query('#form_login').on.submit.add(login);
   query('#logout').on.click.add(logout);
-  query('#close').on.click.add(hide_error);
+  query('#close').on.click.add(hideError);
 }
 
-void hide_error (event) {
-  DivElement error = query('#error');
-  error.style.display = 'none';
+/** Handler that closes the error message. */
+void hideError (event) {
+  query('#error').style.display = 'none';
 }
 
+/** 
+ * Function that handles the login of a user. Takes the [user] and the 
+ * [pass] from the html form and sends a POST request to the server.
+ * If the user or password are incorrect shows an error message saying:
+ * "User/password is incorrect".
+ * On success hides the login form and shows the logout button
+ */
 void login(event){
+  // Request creation, enabling the use of credentials for user identification
   XMLHttpRequest req = new XMLHttpRequest();
   req.open("POST", "http://192.168.1.63:8000/weather/login/", true);
   req.withCredentials = true;
   
-  InputElement username = query('#user_id');
-  var user = username.value;
-  InputElement password = query('#pass_id');
-  var pass = password.value;
+  // Retrieval of [username] and [pass
+  var user = query('#user_id').value;
+  var pass = query('#pass_id').value;
   
   // Add an event handler to call the onSuccess function when the POST call is successful
   req.on.readyStateChange.add((Event e) {
     if (req.readyState == XMLHttpRequest.DONE) {
       if (req.status == 200) {        
-        DivElement div_loggin = query('#log_form');
-        div_loggin.style.display = 'none';
+        query('#log_form').style.display = 'none';
         
-        DivElement logged_user = query('#logged_user');
-        logged_user.style.display = '';
-        logged_user.text = user;
+        query('#logged_user').style.display = '';
+        query('#logged_user').text = user;
         
-        DivElement div_loggout_button = query('#logout_button');
-        div_loggout_button.style.display = '';
-        DivElement error = query('#error');
-        error.style.display = 'none';
+        query('#logout_button').style.display = '';
+        query('#error').style.display = 'none';
       } 
-      if (req.status == 401) {
+      else if (req.status == 401) {
          print("Error: User/password is incorrect");
          query('#error_text').text = "User/password is incorrect";
-         DivElement error = query('#error');
-         error.style.display = '';
+         query('#error').style.display = '';
       }
     }
   });
-
+  
+  // Creation of a JSON object, containing the plain [user] and [pass]. *Not secure, should IMPROVE*
   var data = JSON.stringify({
-    'username' : user,
-    'password' : pass
+      'username' : user,
+      'password' : pass
   });
   
+  // Send the request
   req.send(data);
+  
+  // Prevent to execute the default action for "submit"
   event.preventDefault();
 }
 
+/**
+ * Function that handles the logout of a user. Sends a POST request asking the
+ * server for a session termination, then hides the logout form and the query
+ * that is being shown (if there is one), and shows the login form again
+ */
 void logout(event) {
   XMLHttpRequest req = new XMLHttpRequest();
   req.open("POST", "http://192.168.1.63:8000/weather/logout/", true);
   req.withCredentials = true;
   req.send();
   
-  DivElement div_loggin = query('#log_form');
-  div_loggin.style.display = '';
-  
-  DivElement logged_user = query('#logged_user');
-  logged_user.style.display = 'none';
-  
-  DivElement div_loggout_button = query('#logout_button');
-  div_loggout_button.style.display = 'none';
-  
-  DivElement div_query = query('#content');
-  div_query.style.display = 'none';
-  
-  DivElement error = query('#error');
-  error.style.display = 'none';
+  query('#log_form').style.display = '';
+  query('#logged_user').style.display = 'none';
+  query('#logout_button').style.display = 'none';
+  query('#content').style.display = 'none';
+  query('#error').style.display = 'none';
 }
 
+/**
+ * Function that creates a new query to the server. It does this via a POST
+ * request with the city to look for, then, on success calls to the showJson
+ * function with the response recieved. On error:
+ * 
+ * * If the user is not logged in shows a "User not logged in" message
+ * * If the city is not found shows a "City not found" message
+ */
 void newQuery(event) {
   // Get the city name from the html form
-  InputElement input = query("#city");
-  var city = input.value;
+  var timeOld = Clock.now();
+  var city = query("#city").value;
   
   // Create and open a new request
   XMLHttpRequest req = new XMLHttpRequest();
@@ -95,22 +106,23 @@ void newQuery(event) {
         if (req.status == 200) {
           var j = JSON.parse(req.responseText);
           if (j.containsKey("result_json")) {
-            DivElement error = query('#error');
-            error.style.display = 'none';
-            onSuccess(req);
+            query('#error').style.display = 'none';
+            onSuccess(req, j["result_json"]);
           }
+          // City not found error handling
           else {
             print('Error: City not found');
             query('#error_text').text = "City not found";
-            DivElement error = query('#error');
-            error.style.display = '';
+            query('#error').style.display = '';
           }
+          var timeNew = Clock.now();
+          print(timeNew-timeOld);
         }
-        if (req.status == 401) {
+        // Login error handling
+        else if (req.status == 401) {
           print('Error: User not logged in');
           query('#error_text').text = "User not logged in";
-          DivElement error = query('#error');
-          error.style.display = '';
+          query('#error').style.display = '';
         }
     }
   });
@@ -119,20 +131,23 @@ void newQuery(event) {
   req.setRequestHeader('Content-Type', 'application/json');
   req.send(JSON.stringify({'city': city}));
 
+  // Prevent to execute the default action for "submit"
   event.preventDefault();
 }
 
-// Function to call after a successful POST call
-void onSuccess(XMLHttpRequest req) {
-  DivElement div = query('#content');
-  div.style.display = '';
-  showJson(req);
+/** Function to call after a successful POST call. Calls the showJson function 
+ * to display the response in the html view
+ */
+void onSuccess(XMLHttpRequest req, var parsedJSON) {
+  query('#content').style.display = '';
+  showJson(parsedJSON);
 }
 
-// Function that shows the distinct forecast data in the corresponding elements
-void showJson(XMLHttpRequest req) {
-  var parsedJSON = JSON.parse(req.responseText)["result_json"];
-  
+/** 
+ * Function that shows the distinct forecast data in the corresponding elements 
+ * of the html
+ */
+void showJson(var parsedJSON) {
   query('#city_name').text = parsedJSON["data"]["request"][0]["query"];
   
   // Current condition
@@ -150,8 +165,7 @@ void showJson(XMLHttpRequest req) {
   query('#windDirection16Point1').text =  currentConditions["winddir16Point"];
   query('#windSpeedkmh1').text =  '${currentConditions["windspeedKmph"]}Kmph';
   query('#windSpeedMiles1').text =  '${currentConditions["windspeedMiles"]}Mph';
-  ImageElement image = query('#img1');
-  image.src = currentConditions["weatherIconUrl"][0]["value"];
+  query('#img1').src = currentConditions["weatherIconUrl"][0]["value"];
   
   // Today's forecast
   var weatherToday = parsedJSON["data"]["weather"][0];
@@ -166,8 +180,7 @@ void showJson(XMLHttpRequest req) {
   query('#windDirection16Point2').text =  weatherToday["winddir16Point"];
   query('#windSpeedkmh2').text =  '${weatherToday["windspeedKmph"]}Kmph';
   query('#windSpeedMiles2').text =  '${weatherToday["windspeedMiles"]}Mph';
-  ImageElement image2 = query('#img2');
-  image2.src = weatherToday["weatherIconUrl"][0]["value"];
+  query('#img2').src = weatherToday["weatherIconUrl"][0]["value"];
   
   // Tomorrow's forecast
   var weatherTomorrow = parsedJSON["data"]["weather"][1];
@@ -182,6 +195,5 @@ void showJson(XMLHttpRequest req) {
   query('#windDirection16Point3').text =  weatherTomorrow["winddir16Point"];
   query('#windSpeedkmh3').text =  '${weatherTomorrow["windspeedKmph"]}Kmph';
   query('#windSpeedMiles3').text =  '${weatherTomorrow["windspeedMiles"]}Mph';
-  ImageElement image3 = query('#img3');
-  image3.src = weatherTomorrow["weatherIconUrl"][0]["value"];
+  query('#img3').src = weatherTomorrow["weatherIconUrl"][0]["value"];
 }
