@@ -26,7 +26,7 @@ void login(event){
   // Add an event handler to call the onSuccess function when the POST call is successful
   req.on.readyStateChange.add((Event e) {
     if (req.readyState == XMLHttpRequest.DONE) {
-      if (req.status == 200) {
+      if (req.status == 200) {        
         DivElement div_loggin = query('#log_form');
         div_loggin.style.display = 'none';
         
@@ -133,16 +133,18 @@ void onSuccess(XMLHttpRequest req) {
 void showJson(XMLHttpRequest req) {
   var parsedJSON = JSON.parse(req.responseText)["result_json"];
   
+  query('#city_name').text = parsedJSON["data"]["request"][0]["query"];
+  
   // Current condition
   var currentConditions = parsedJSON["data"]["current_condition"][0];
   query('#observationTime').text = currentConditions["observation_time"];
   query('#description1').text = currentConditions["weatherDesc"][0]["value"];
   query('#tCelsius').text = '${currentConditions["temp_C"]}ºC';
   query('#tFarenheit').text = '${currentConditions["temp_F"]}ºF';
-  query('#humidity').text = currentConditions["humidity"];
+  query('#humidity').text = '${currentConditions["humidity"]}%';
   query('#precipitation1').text = '${currentConditions["precipMM"]} MM';
   query('#cloudcover').text =  '${currentConditions["cloudcover"]}%';
-  query('#visibility').text =  currentConditions["visibility"];
+  query('#visibility').text =  '${currentConditions["visibility"]}Km';
   query('#pressure').text =  currentConditions["pressure"];
   query('#windDirectionDegree1').text =  '${currentConditions["winddirDegree"]}º';
   query('#windDirection16Point1').text =  currentConditions["winddir16Point"];
@@ -150,7 +152,6 @@ void showJson(XMLHttpRequest req) {
   query('#windSpeedMiles1').text =  '${currentConditions["windspeedMiles"]}Mph';
   ImageElement image = query('#img1');
   image.src = currentConditions["weatherIconUrl"][0]["value"];
-  query('#city_name').text = parsedJSON["data"]["request"][0]["query"];
   
   // Today's forecast
   var weatherToday = parsedJSON["data"]["weather"][0];
@@ -160,8 +161,7 @@ void showJson(XMLHttpRequest req) {
   query('#minTFarenheit1').text = '${weatherToday["tempMinF"]}ºF';
   query('#maxTCelsius1').text = '${weatherToday["tempMaxC"]}ºC';
   query('#maxTFarenheit1').text = '${weatherToday["tempMaxF"]}ºF';
-  query('#precipitation2').text = weatherToday["precipMM"];
-  query('#precipitation2').text = weatherToday["precipMM"];
+  query('#precipitation2').text = '${weatherToday["precipMM"]}MM';
   query('#windDirectionDegree2').text =  '${weatherToday["winddirDegree"]}º';
   query('#windDirection16Point2').text =  weatherToday["winddir16Point"];
   query('#windSpeedkmh2').text =  '${weatherToday["windspeedKmph"]}Kmph';
@@ -177,8 +177,7 @@ void showJson(XMLHttpRequest req) {
   query('#minTFarenheit2').text = '${weatherTomorrow["tempMinF"]}ºF';
   query('#maxTCelsius2').text = '${weatherTomorrow["tempMaxC"]}ºC';
   query('#maxTFarenheit2').text = '${weatherTomorrow["tempMaxF"]}ºF';
-  query('#precipitation3').text = weatherTomorrow["precipMM"];
-  query('#precipitation3').text = weatherTomorrow["precipMM"];
+  query('#precipitation3').text = '${weatherTomorrow["precipMM"]}MM';
   query('#windDirectionDegree3').text =  '${weatherTomorrow["winddirDegree"]}º';
   query('#windDirection16Point3').text =  weatherTomorrow["winddir16Point"];
   query('#windSpeedkmh3').text =  '${weatherTomorrow["windspeedKmph"]}Kmph';
