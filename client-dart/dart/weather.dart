@@ -1,29 +1,12 @@
 #import('dart:html');
 #import('dart:json');
 
-var pets = 0;
-
 /** Main function. Intializes all the buttons and fucntions for future use. */
 void main() {
-  var btnQuery = query('#formulary');
-  btnQuery.on.submit.add(newQuery);
-  var btnLogin = query('#form_login');
-  btnLogin.on.submit.add(login_1);
+  query('#formulary').on.submit.add(newQuery);
+  query('#form_login').on.submit.add(login);
   query('#logout').on.click.add(logout);
   query('#close').on.click.add(hideError);
-  
-  query('#user_id').value = "aitor";
-  query('#pass_id').value = "aitor";
-}
-
-/** Handler that closes the error message. */
-void hideError (event) {
-  query('#error').style.display = 'none';
-}
-
-void login_1(event){
-  event.preventDefault();
-  login();
 }
 
 /** 
@@ -33,9 +16,7 @@ void login_1(event){
  * "User/password is incorrect".
  * On success hides the login form and shows the logout button
  */
-void login(){
-  
-  Date timeOld = new Date.now();
+void login(event){
   
   // Request creation, enabling the use of credentials for user identification
   XMLHttpRequest req = new XMLHttpRequest();
@@ -57,20 +38,11 @@ void login(){
         
         query('#logout_button').style.display = '';
         query('#error').style.display = 'none';
-        Date timeNew = new Date.now();
-        var time = timeNew.millisecondsSinceEpoch - timeOld.millisecondsSinceEpoch;
-        print(time);
       } 
       else if (req.status == 401) {
          print("Error: User/password is incorrect");
          query('#error_text').text = "User/password is incorrect";
          query('#error').style.display = '';
-      }
-      
-      pets++;
-      
-      if(pets < 100) {
-        login();
       }
     }
   });
@@ -85,7 +57,7 @@ void login(){
   req.send(data);
   
   // Prevent to execute the default action for "submit"
-  //event.preventDefault();
+  event.preventDefault();
 }
 
 /**
@@ -165,6 +137,11 @@ void newQuery(event) {
 void onSuccess(XMLHttpRequest req, var parsedJSON) {
   query('#content').style.display = '';
   showJson(parsedJSON);
+}
+
+/** Handler that closes the error message. */
+void hideError (event) {
+  query('#error').style.display = 'none';
 }
 
 /** 
