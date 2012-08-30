@@ -20,7 +20,7 @@ class WeatherController {
       view.logout.on.click.add(logout);
       view.close.on.click.add(hideError);
       
-      model = new WeatherModel(this);
+      model = new WeatherModel();
   }
   
   /**
@@ -37,15 +37,41 @@ class WeatherController {
   //  Prevent to execute the default action for "submit"
     event.preventDefault();
     
-    model.login(view.user.value, view.pass.value);
+    var req = model.login(view.user.value, view.pass.value);
+    
+    // Add an event handler to call the onSuccess function when the POST call is 
+    // successful
+    req.on.readyStateChange.add((Event e) {
+      if (req.readyState == XMLHttpRequest.DONE) {
+        if (req.status == 200) {
+          // Calling the controller is a horrible work-around. It should send a
+          // custom event for the controller to handle (not yet developed by google).
+          view.loginSuccess();
+        } 
+        else if (req.status == 401) {
+          // Calling the controller is a horrible work-around. It should send a
+          // custom event for the controller to handle (not yet developed by google).
+          view.loginError();
+        }
+      }
+    });
   }
   
   /**
    * Asks the model to logout and changes the view accordingly
    */
   void logout(event) {
-    model.logout();
-    view.logoutView();
+    var req = model.logout();
+    req.on.readyStateChange.add((Event e) {
+      if (req.readyState == XMLHttpRequest.DONE) {
+        if (req.status == 200) {
+          view.logoutView();
+        }
+        else {
+          print('Logout Error');
+        }
+      }
+    });
   }
   
   /**
@@ -56,48 +82,27 @@ class WeatherController {
   // Prevent to execute the default action for "submit"
     event.preventDefault();
   
-    model.newQuery(view.getCity());
+    var req = model.newQuery(view.getCity());
+    
+    // Add an event handler to call the onSuccess function when the POST call is successful
+    req.on.readyStateChange.add((Event e) {
+      if (req.readyState == XMLHttpRequest.DONE) {
+        if (req.status == 200) {
+          var j = JSON.parse(req.responseText);
+            if (j.containsKey("result_json")) {
+              view.hideError();
+              view.showJson(j["result_json"]);
+            }
+            // City not found error handling
+            else {
+              view.cityNotFoundError();
+            }
+          }
+        // Login error handling
+        else if (req.status == 401) {
+          view.notLoggedInError();
+        }
+      } 
+    });
   }
-  
-  /**
-   * If the login success, calls the view to change accordingly. *Appropiate 
-   * custom event treatment pending until development*
-   */
-  void loginSuccess() {
-    view.loginSuccess();
-  }
-  
-  /**
-   * If the login fails, shows the corresponding error message. *Appropiate 
-   * custom event treatment pending until development*
-   */
-  void loginError() {
-    view.loginError();
-  }
-  
-  /**
-   * If a user that's not logged in tries to make a query shows the 
-   * corresponding error message. *Appropiate custom event treatment pending 
-   * until development*
-   */
-  void notLoggedInError() {
-    view.notLoggedInError();
-  }
-  
-  /**
-   * If the city you ask for cannot be found shows the corresponding error 
-   * message. *Appropiate custom event treatment pending until development*
-   */
-  void cityNotFoundError() {
-    view.cityNotFoundError();
-  }
-  
-  /**
-   * After a succesful query changes the view to show all the data retrieved.
-   * *Appropiate custom event treatment pending until development*
-   */
-  void showJson(j) {
-    view.showJson(j);
-  }
-
 }

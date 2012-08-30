@@ -16,7 +16,7 @@
 				} else if (req_login.status == 401) {
 		 			document.getElementById('error_text').textContent = "The user and/or the password are not correct";
 		 			document.getElementById('error').style.display="";
-	      			}
+	      		}
 			}
 		}
 
