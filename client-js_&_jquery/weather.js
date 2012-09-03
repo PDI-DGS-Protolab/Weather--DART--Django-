@@ -3,11 +3,12 @@
   		var pass = document.getElementById("pass_id").value;
   		
   		var req_login = new XMLHttpRequest();
-  		req_login.open("GET", "http://127.0.0.1:8000/weather/login?username=" + user + "&password=" + pass, true);
+  		req_login.open("POST", "http://192.168.1.63:8000/weather/login/", true);
+  	    req_login.setRequestHeader('Content-Type', 'application/json');
   		req_login.withCredentials = true;
   		req_login.onreadystatechange = function() {
 	  		if (req_login.readyState == XMLHttpRequest.DONE) {
-	      			if (req_login.status == 200) {        
+	      		if (req_login.status == 200) {        
 					document.getElementById("log_form").style.display = 'none';
 					document.getElementById("logged_user").style.display = 'block';
 					document.getElementById("logged_user").textContent = document.getElementById("user_id").value;
@@ -19,13 +20,12 @@
 	      		}
 			}
 		}
-
-  		req_login.send();
+  		req_login.send(JSON.stringify({username: user, password: pass}));
   	}
 
 	function logout_fun() {
 	  var req_logout = new XMLHttpRequest();
-	  req_logout.open("GET", "http://127.0.0.1:8000/weather/logout", true);
+	  req_logout.open("POST", "http://192.168.1.63:8000/weather/logout/", true);
 	  req_logout.withCredentials = true;
 	  req_logout.send();
 	  
@@ -42,37 +42,41 @@
 		  
 		// Create and open a new request
 		var req_search = new XMLHttpRequest();
-		req_search.open("GET", "http://127.0.0.1:8000/weather/" + city +"/", true);
+		req_search.open("POST", "http://192.168.1.63:8000/weather/querys/", true);
+	    req_search.setRequestHeader('Content-Type', 'application/json');
 		req_search.withCredentials = true;
 		req_search.onreadystatechange = function() {
 			// Add an event handler to call the onSuccess function when the POST call is successful
 			if (req_search.readyState == XMLHttpRequest.DONE) {
 				if (req_search.status == 200) {
-					document.getElementById('error').style.display = 'none';
-					document.getElementById('content').style.display = '';
-			 		onSuccess(req_search.responseText);
-			     	} else if (req_search.status == 404) {
-					document.getElementById('error_text').textContent = "City " + city + " not found";
-			 		document.getElementById('error').style.display = '';
-			     	} else if (req_search.status == 403) {
-			 		document.getElementById('error_text').textContent = "You are not logged in";
-			 		document.getElementById('error').style.display = '';
+    				var j = JSON.parse(req_search.responseText);
+				    if (j.hasOwnProperty("result_json")){
+					    document.getElementById('error').style.display = 'none';
+					    document.getElementById('content').style.display = '';
+			 		    onSuccess(j["result_json"]);
+			     	} 
+			     	    else {
+					    document.getElementById('error_text').textContent = "City " + city + " not found";
+			 		    document.getElementById('error').style.display = '';
+			 		}
+			     } 
+			    else if (req_search.status == 401) {
+			 	document.getElementById('error_text').textContent = "You are not logged in";
+			 	document.getElementById('error').style.display = '';
 			 	}
 			}
 		};
 
 		// Set the content type of the call and send the data
-		req_search.send();
+		req_search.send(JSON.stringify({city: city}));
 
 	}
 
-	function onSuccess(json) {
-		var parsedJSON = JSON.parse(json);
-
-		document.getElementById('city_name').textContent = parsedJSON["data"]["request"][0]["query"];
+	function onSuccess(j) {
+		document.getElementById('city_name').textContent = j["data"]["request"][0]["query"];
 		  
 		// Current condition
-		var currentConditions = parsedJSON["data"]["current_condition"][0];
+		var currentConditions = j["data"]["current_condition"][0];
 		document.getElementById('observationTime').textContent = currentConditions["observation_time"];
 		document.getElementById('description1').textContent = currentConditions["weatherDesc"][0]["value"];
 		document.getElementById('tCelsius').textContent = currentConditions["temp_C"] + 'ºC';
@@ -89,7 +93,7 @@
 		document.getElementById('img1').src = currentConditions["weatherIconUrl"][0]["value"];
 		 
 		// Today's forecast
-		var weatherToday = parsedJSON["data"]["weather"][0];
+		var weatherToday = j["data"]["weather"][0];
 		document.getElementById('dateToday').textContent = weatherToday["date"];
 		document.getElementById('description2').textContent = weatherToday["weatherDesc"][0]["value"];
 		document.getElementById('minTCelsius1').textContent = weatherToday["tempMinC"]+ 'ºC';
@@ -104,7 +108,7 @@
 		document.getElementById('img2').src = weatherToday["weatherIconUrl"][0]["value"];
 		  
 		// Tomorrow's forecast
-		var weatherTomorrow = parsedJSON["data"]["weather"][1];
+		var weatherTomorrow = j["data"]["weather"][1];
 		document.getElementById('dateTomorrow').textContent = weatherTomorrow["date"];
 		document.getElementById('description3').textContent = weatherTomorrow["weatherDesc"][0]["value"];
 		document.getElementById('minTCelsius2').textContent = weatherTomorrow["tempMinC"]+ 'ºC';
@@ -123,6 +127,7 @@
 		document.getElementById('error').style.display = 'none';
 	}
 
-	document.getElementById("formu_login").addEventListener('submit',  function (eventObject) { login_fun(); eventObject.preventDefault(); }, false);
+	document.getElementById("form_login").addEventListener('submit',  function (eventObject) { eventObject.preventDefault(); login_fun(); }, false);
 	document.getElementById("formulary").addEventListener('submit',  function (eventObject) { search_fun(); eventObject.preventDefault(); }, false);
+    document.getElementById("close").addEventListener('click',  function (eventObject) { hide_error();}, false);
 
