@@ -225,7 +225,7 @@ $$.HashMapImplementation = {"":
     return this.forEach$1$bailout(1, f, length$);
   for (var i = 0; i < length$; ++i) {
     var key = $.index(this._keys, i);
-    if (!(key == null) && !(key === $.CTC4))
+    if (!(key == null) && !(key === $.CTC3))
       f.call$2(key, $.index(this._values, i));
   }
 },
@@ -233,7 +233,7 @@ $$.HashMapImplementation = {"":
   ;
   for (var i = 0; $.ltB(i, length$); ++i) {
     var key = $.index(this._keys, i);
-    if (!(key == null) && !(key === $.CTC4))
+    if (!(key == null) && !(key === $.CTC3))
       f.call$2(key, $.index(this._values, i));
   }
 },
@@ -249,7 +249,7 @@ $$.HashMapImplementation = {"":
     this._numberOfEntries = $.sub(this._numberOfEntries, 1);
     var value = $.index(this._values, index);
     $.indexSet(this._values, index, null);
-    $.indexSet(this._keys, index, $.CTC4);
+    $.indexSet(this._keys, index, $.CTC3);
     this._numberOfDeleted = $.add(this._numberOfDeleted, 1);
     return value;
   }
@@ -278,7 +278,7 @@ $$.HashMapImplementation = {"":
     t3 = t1 .length;
     if (index < 0 || index >= t3)
       throw $.ioore(index);
-    var t4 = t1[index] === $.CTC4;
+    var t4 = t1[index] === $.CTC3;
     t1 = t4;
   } else
     t1 = true;
@@ -349,7 +349,7 @@ $$.HashMapImplementation = {"":
             t1 = this._keys;
           case 2:
             state = 0;
-            var t3 = $.index(t1, index) === $.CTC4;
+            var t3 = $.index(t1, index) === $.CTC3;
             t1 = t3;
         }
       else
@@ -411,7 +411,7 @@ $$.HashMapImplementation = {"":
     if (i < 0 || i >= t1)
       throw $.ioore(i);
     var key = oldKeys[i];
-    if (key == null || key === $.CTC4)
+    if (key == null || key === $.CTC3)
       continue;
     t1 = oldValues.length;
     if (i < 0 || i >= t1)
@@ -459,7 +459,7 @@ $$.HashMapImplementation = {"":
       this._values = t4;
       for (var i = 0; $.ltB(i, capacity); ++i) {
         var key = $.index(oldKeys, i);
-        if (key == null || key === $.CTC4)
+        if (key == null || key === $.CTC3)
           continue;
         var value = $.index(oldValues, i);
         var newIndex = this._probeForAdding$1(key);
@@ -510,7 +510,7 @@ $$.HashMapImplementation = {"":
       return insertionIndex;
     } else if ($.eqB(existingKey, key))
       return hash;
-    else if (insertionIndex < 0 && $.CTC4 === existingKey)
+    else if (insertionIndex < 0 && $.CTC3 === existingKey)
       insertionIndex = hash;
     var numberOfProbes0 = numberOfProbes + 1;
     hash = $.HashMapImplementation__nextProbe(hash, numberOfProbes, $.get$length(this._keys));
@@ -563,7 +563,7 @@ $$.HashMapImplementation = {"":
                 return insertionIndex;
               } else if ($.eqB(existingKey, key))
                 return hash;
-              else if ($.ltB(insertionIndex, 0) && $.CTC4 === existingKey)
+              else if ($.ltB(insertionIndex, 0) && $.CTC3 === existingKey)
                 insertionIndex = hash;
               var numberOfProbes0 = numberOfProbes + 1;
               hash = $.HashMapImplementation__nextProbe(hash, numberOfProbes, $.get$length(this._keys));
@@ -660,7 +660,7 @@ $$.HashSetIterator = {"":
     if (t2 < 0 || t2 >= t3)
       throw $.ioore(t2);
     entry = t1[t2];
-  } while (entry == null || entry === $.CTC4);
+  } while (entry == null || entry === $.CTC3);
 },
  _advance$0$bailout: function(state, t1) {
   ;
@@ -672,11 +672,11 @@ $$.HashSetIterator = {"":
     if ($.geB(t2, length$))
       break;
     entry = $.index(t1, this._nextValidIndex);
-  } while (entry == null || entry === $.CTC4);
+  } while (entry == null || entry === $.CTC3);
 },
  next$0: function() {
   if (this.hasNext$0() !== true)
-    throw $.captureStackTrace($.CTC2);
+    throw $.captureStackTrace($.CTC1);
   var t1 = this._entries;
   if (typeof t1 !== 'string' && (typeof t1 !== 'object' || t1 === null || t1 .constructor !== Array && !t1 .is$JavaScriptIndexingBehavior()))
     return this.next$0$bailout(1, t1);
@@ -708,7 +708,7 @@ $$.HashSetIterator = {"":
     throw $.iae(t1);
   if (t1 < 0 || t1 >= t4)
     throw $.ioore(t1);
-  if (t2[t1] === $.CTC4)
+  if (t2[t1] === $.CTC3)
     this._advance$0();
   return this._nextValidIndex < t2 .length;
 },
@@ -716,7 +716,7 @@ $$.HashSetIterator = {"":
   ;
   if ($.geB(t1, $.get$length(t2)))
     return false;
-  if ($.index(t2, this._nextValidIndex) === $.CTC4)
+  if ($.index(t2, this._nextValidIndex) === $.CTC3)
     this._advance$0();
   return $.lt(this._nextValidIndex, $.get$length(t2));
 },
@@ -869,13 +869,13 @@ $$._DoubleLinkedQueueEntrySentinel = {"":
  ["_element", "_next", "_previous"],
  super: "DoubleLinkedQueueEntry",
  get$element: function() {
-  throw $.captureStackTrace($.CTC3);
+  throw $.captureStackTrace($.CTC2);
 },
  _asNonSentinelEntry$0: function() {
   return;
 },
  remove$0: function() {
-  throw $.captureStackTrace($.CTC3);
+  throw $.captureStackTrace($.CTC2);
 },
  _DoubleLinkedQueueEntrySentinel$0: function() {
   this._link$2(this, this);
@@ -946,7 +946,7 @@ $$._DoubleLinkedQueueIterator = {"":
  super: "Object",
  next$0: function() {
   if (this.hasNext$0() !== true)
-    throw $.captureStackTrace($.CTC2);
+    throw $.captureStackTrace($.CTC1);
   this._currentEntry = this._currentEntry.get$_next();
   return this._currentEntry.get$element();
 },
@@ -1058,14 +1058,22 @@ $$.JSSyntaxRegExp = {"":
 };
 
 $$.MatchImplementation = {"":
- ["_groups", "_end", "_start", "str", "pattern?"],
+ ["_groups", "_end", "_lib0_start", "str", "pattern?"],
  super: "Object",
  operator$index$1: function(index) {
   return this.group$1(index);
 },
  group$1: function(index) {
   return $.index(this._groups, index);
-}
+},
+ end$0: function() {
+  return this._end;
+},
+ get$end: function() { return new $.BoundClosure(this, 'end$0'); },
+ start$0: function() {
+  return this._lib0_start;
+},
+ get$start: function() { return new $.BoundClosure(this, 'start$0'); }
 };
 
 $$._AllMatchesIterable = {"":
@@ -1093,7 +1101,7 @@ $$._AllMatchesIterator = {"":
 },
  next$0: function() {
   if (this.hasNext$0() !== true)
-    throw $.captureStackTrace($.CTC2);
+    throw $.captureStackTrace($.CTC1);
   var next = this._next;
   this._next = null;
   return next;
@@ -1153,7 +1161,7 @@ $$.MetaInfo = {"":
 };
 
 $$.StringMatch = {"":
- ["pattern?", "str", "_lib1_start"],
+ ["pattern?", "str", "_start"],
  super: "Object",
  group$1: function(group_) {
   if (!$.eqB(group_, 0))
@@ -1162,7 +1170,15 @@ $$.StringMatch = {"":
 },
  operator$index$1: function(g) {
   return this.group$1(g);
-}
+},
+ end$0: function() {
+  return $.add(this._start, $.get$length(this.pattern));
+},
+ get$end: function() { return new $.BoundClosure(this, 'end$0'); },
+ start$0: function() {
+  return this._start;
+},
+ get$start: function() { return new $.BoundClosure(this, 'start$0'); }
 };
 
 $$.Object = {"":
@@ -1367,6 +1383,249 @@ $$.FutureAlreadyCompleteException = {"":
  is$Exception: true
 };
 
+$$.WeatherController = {"":
+ ["model", "view?"],
+ super: "Object",
+ newQuery$1: function(event$) {
+  event$.preventDefault$0();
+  var req = this.model.newQuery$1(this.view.getCity$0());
+  $.add$1(req.get$on().get$readyStateChange(), new $.WeatherController_newQuery_anon(this, req));
+},
+ get$newQuery: function() { return new $.BoundClosure0(this, 'newQuery$1'); },
+ logout$1: function(event$) {
+  var req = this.model.logout$0();
+  $.add$1(req.get$on().get$readyStateChange(), new $.WeatherController_logout_anon(this, req));
+},
+ get$logout: function() { return new $.BoundClosure0(this, 'logout$1'); },
+ login$1: function(event$) {
+  event$.preventDefault$0();
+  var t1 = this.model;
+  var t2 = this.view;
+  var req = t1 .login$2(t2 .get$user().get$value(), t2 .get$pass().get$value());
+  $.add$1(req.get$on().get$readyStateChange(), new $.WeatherController_login_anon(this, req));
+},
+ get$login: function() { return new $.BoundClosure0(this, 'login$1'); },
+ hideError$1: function(event$) {
+  this.view.hideError$0();
+},
+ WeatherController$0: function() {
+  this.view = $.WeatherView$();
+  var t1 = this.view;
+  $.add$1(t1 .get$form().get$on().get$submit(), this.get$newQuery());
+  $.add$1(t1 .get$login().get$on().get$submit(), this.get$login());
+  $.add$1(t1 .get$logout().get$on().get$click(), this.get$logout());
+  $.add$1(t1 .get$close().get$on().get$click(), new $.anon(this));
+  this.model = $.WeatherModel$();
+}
+};
+
+$$.WeatherView = {"":
+ ["pass?", "user?", "close?", "logout?", "login?", "form?"],
+ super: "Object",
+ showJson$1: function(parsedJSON) {
+  $.query('#content').get$style().set$display('');
+  var t1 = $.index($.index($.index($.index(parsedJSON, 'data'), 'request'), 0), 'query');
+  $.query('#city_name').set$text(t1);
+  var currentConditions = $.index($.index($.index(parsedJSON, 'data'), 'current_condition'), 0);
+  t1 = $.index(currentConditions, 'observation_time');
+  $.query('#observationTime').set$text(t1);
+  t1 = $.index($.index($.index(currentConditions, 'weatherDesc'), 0), 'value');
+  $.query('#description1').set$text(t1);
+  t1 = $.S($.index(currentConditions, 'temp_C')) + '\xbaC';
+  $.query('#tCelsius').set$text(t1);
+  t1 = $.S($.index(currentConditions, 'temp_F')) + '\xbaF';
+  $.query('#tFarenheit').set$text(t1);
+  t1 = $.S($.index(currentConditions, 'humidity')) + '%';
+  $.query('#humidity').set$text(t1);
+  t1 = $.S($.index(currentConditions, 'precipMM')) + ' MM';
+  $.query('#precipitation1').set$text(t1);
+  t1 = $.S($.index(currentConditions, 'cloudcover')) + '%';
+  $.query('#cloudcover').set$text(t1);
+  t1 = $.S($.index(currentConditions, 'visibility')) + 'Km';
+  $.query('#visibility').set$text(t1);
+  t1 = $.index(currentConditions, 'pressure');
+  $.query('#pressure').set$text(t1);
+  t1 = $.S($.index(currentConditions, 'winddirDegree')) + '\xba';
+  $.query('#windDirectionDegree1').set$text(t1);
+  t1 = $.index(currentConditions, 'winddir16Point');
+  $.query('#windDirection16Point1').set$text(t1);
+  t1 = $.S($.index(currentConditions, 'windspeedKmph')) + 'Kmph';
+  $.query('#windSpeedkmh1').set$text(t1);
+  t1 = $.S($.index(currentConditions, 'windspeedMiles')) + 'Mph';
+  $.query('#windSpeedMiles1').set$text(t1);
+  t1 = $.index($.index($.index(currentConditions, 'weatherIconUrl'), 0), 'value');
+  $.query('#img1').set$src(t1);
+  var weatherToday = $.index($.index($.index(parsedJSON, 'data'), 'weather'), 0);
+  t1 = $.index(weatherToday, 'date');
+  $.query('#dateToday').set$text(t1);
+  t1 = $.index($.index($.index(weatherToday, 'weatherDesc'), 0), 'value');
+  $.query('#description2').set$text(t1);
+  t1 = $.S($.index(weatherToday, 'tempMinC')) + '\xbaC';
+  $.query('#minTCelsius1').set$text(t1);
+  t1 = $.S($.index(weatherToday, 'tempMinF')) + '\xbaF';
+  $.query('#minTFarenheit1').set$text(t1);
+  t1 = $.S($.index(weatherToday, 'tempMaxC')) + '\xbaC';
+  $.query('#maxTCelsius1').set$text(t1);
+  t1 = $.S($.index(weatherToday, 'tempMaxF')) + '\xbaF';
+  $.query('#maxTFarenheit1').set$text(t1);
+  t1 = $.S($.index(weatherToday, 'precipMM')) + 'MM';
+  $.query('#precipitation2').set$text(t1);
+  t1 = $.S($.index(weatherToday, 'winddirDegree')) + '\xba';
+  $.query('#windDirectionDegree2').set$text(t1);
+  t1 = $.index(weatherToday, 'winddir16Point');
+  $.query('#windDirection16Point2').set$text(t1);
+  t1 = $.S($.index(weatherToday, 'windspeedKmph')) + 'Kmph';
+  $.query('#windSpeedkmh2').set$text(t1);
+  t1 = $.S($.index(weatherToday, 'windspeedMiles')) + 'Mph';
+  $.query('#windSpeedMiles2').set$text(t1);
+  t1 = $.index($.index($.index(weatherToday, 'weatherIconUrl'), 0), 'value');
+  $.query('#img2').set$src(t1);
+  var weatherTomorrow = $.index($.index($.index(parsedJSON, 'data'), 'weather'), 1);
+  t1 = $.index(weatherTomorrow, 'date');
+  $.query('#dateTomorrow').set$text(t1);
+  t1 = $.index($.index($.index(weatherTomorrow, 'weatherDesc'), 0), 'value');
+  $.query('#description3').set$text(t1);
+  t1 = $.S($.index(weatherTomorrow, 'tempMinC')) + '\xbaC';
+  $.query('#minTCelsius2').set$text(t1);
+  t1 = $.S($.index(weatherTomorrow, 'tempMinF')) + '\xbaF';
+  $.query('#minTFarenheit2').set$text(t1);
+  t1 = $.S($.index(weatherTomorrow, 'tempMaxC')) + '\xbaC';
+  $.query('#maxTCelsius2').set$text(t1);
+  t1 = $.S($.index(weatherTomorrow, 'tempMaxF')) + '\xbaF';
+  $.query('#maxTFarenheit2').set$text(t1);
+  t1 = $.S($.index(weatherTomorrow, 'precipMM')) + 'MM';
+  $.query('#precipitation3').set$text(t1);
+  t1 = $.S($.index(weatherTomorrow, 'winddirDegree')) + '\xba';
+  $.query('#windDirectionDegree3').set$text(t1);
+  t1 = $.index(weatherTomorrow, 'winddir16Point');
+  $.query('#windDirection16Point3').set$text(t1);
+  t1 = $.S($.index(weatherTomorrow, 'windspeedKmph')) + 'Kmph';
+  $.query('#windSpeedkmh3').set$text(t1);
+  t1 = $.S($.index(weatherTomorrow, 'windspeedMiles')) + 'Mph';
+  $.query('#windSpeedMiles3').set$text(t1);
+  t1 = $.index($.index($.index(weatherTomorrow, 'weatherIconUrl'), 0), 'value');
+  $.query('#img3').set$src(t1);
+},
+ notLoggedInError$0: function() {
+  $.print('Error: User not logged in');
+  $.query('#error_text').set$text('User not logged in');
+  $.query('#error').get$style().set$display('');
+},
+ logoutView$0: function() {
+  $.query('#log_form').get$style().set$display('');
+  $.query('#logged_user').get$style().set$display('none');
+  $.query('#logout_button').get$style().set$display('none');
+  $.query('#content').get$style().set$display('none');
+  $.query('#error').get$style().set$display('none');
+},
+ loginSuccess$0: function() {
+  $.query('#log_form').get$style().set$display('none');
+  $.query('#logged_user').get$style().set$display('');
+  var t1 = this.user.get$value();
+  $.query('#logged_user').set$text(t1);
+  $.query('#logout_button').get$style().set$display('');
+  $.query('#error').get$style().set$display('none');
+},
+ loginError$0: function() {
+  $.print('Error: User/password is incorrect');
+  $.query('#error_text').set$text('User/password is incorrect');
+  $.query('#error').get$style().set$display('');
+},
+ hideError$0: function() {
+  $.query('#error').get$style().set$display('none');
+},
+ getCity$0: function() {
+  return $.query('#city').get$value();
+},
+ cityNotFoundError$0: function() {
+  $.print('Error: City not found');
+  $.query('#error_text').set$text('City not found');
+  $.query('#error').get$style().set$display('');
+},
+ close$0: function() { return this.close.call$0(); },
+ logout$0: function() { return this.logout.call$0(); },
+ login$2: function(arg0, arg1) { return this.login.call$2(arg0, arg1); },
+ WeatherView$0: function() {
+  this.form = $.query('#formulary');
+  this.login = $.query('#form_login');
+  this.logout = $.query('#logout');
+  this.close = $.query('#close');
+  this.user = $.query('#user_id');
+  this.pass = $.query('#pass_id');
+}
+};
+
+$$.WeatherModel = {"":
+ [],
+ super: "Object",
+ newQuery$1: function(city) {
+  var req = $._XMLHttpRequestFactoryProvider_XMLHttpRequest();
+  req.open$3('POST', 'http://192.168.1.63:8000/weather/querys/', true);
+  req.set$withCredentials(true);
+  req.setRequestHeader$2('Content-Type', 'application/json');
+  req.send$1($.JSON_stringify($.makeLiteralMap(['city', city])));
+  return req;
+},
+ logout$0: function() {
+  var req = $._XMLHttpRequestFactoryProvider_XMLHttpRequest();
+  req.open$3('POST', 'http://192.168.1.63:8000/weather/logout/', true);
+  req.set$withCredentials(true);
+  req.send$0();
+  return req;
+},
+ get$logout: function() { return new $.BoundClosure(this, 'logout$0'); },
+ login$2: function(user, pass) {
+  var req = $._XMLHttpRequestFactoryProvider_XMLHttpRequest();
+  req.open$3('POST', 'http://192.168.1.63:8000/weather/login/', true);
+  req.set$withCredentials(true);
+  req.send$1($.JSON_stringify($.makeLiteralMap(['username', user, 'password', pass])));
+  return req;
+},
+ get$login: function() { return new $.BoundClosure1(this, 'login$2'); }
+};
+
+$$.WeatherTest = {"":
+ ["v=", "q=", "l=", "average=", "elapsed=", "end=", "start?", "view?", "model"],
+ super: "Object",
+ testQueryView$3: function(n, city1, city2) {
+  $.print('Executing ' + $.S(n) + ' calls to newQuery with view update...');
+  this.v = 0;
+  this.start = $.DateImplementation$now();
+  for (var t1 = this.model, i = 0; i < n; ++i) {
+    var t2 = (({}));
+    t2 .req_1 = null;
+    if ($.mod(i, 2) === 0)
+      t2 .req_1 = t1 .newQuery$1(city1);
+    else
+      t2 .req_1 = t1 .newQuery$1(city2);
+    $.add$1(t2 .req_1 .get$on().get$readyStateChange(), new $.WeatherTest_testQueryView_anon(this, t2, n));
+  }
+},
+ testQuery$2: function(n, city) {
+  $.print('Executing ' + $.S(n) + ' calls to newQuery...');
+  this.q = 0;
+  this.start = $.DateImplementation$now();
+  for (var t1 = this.model, i = 0; i < n; ++i) {
+    var req = t1 .newQuery$1(city);
+    $.add$1(req.get$on().get$readyStateChange(), new $.WeatherTest_testQuery_anon(this, req, n));
+  }
+},
+ testLogin$1: function(n) {
+  $.print('Executing ' + $.S(n) + ' calls to login...');
+  this.l = 0;
+  this.start = $.DateImplementation$now();
+  for (var t1 = this.model, i = 0; i < n; ++i) {
+    var req = t1 .login$2('admin', 'admin');
+    $.add$1(req.get$on().get$readyStateChange(), new $.WeatherTest_testLogin_anon(this, req, n));
+  }
+},
+ WeatherTest$0: function() {
+  this.model = $.WeatherModel$();
+  this.view = $.WeatherView$();
+  this.testLogin$1(1000);
+}
+};
+
 $$._AbstractWorkerEventsImpl = {"":
  ["_ptr"],
  super: "_EventsImpl"
@@ -1414,6 +1673,9 @@ $$._DocumentEventsImpl = {"":
  get$readyStateChange: function() {
   return this.operator$index$1('readystatechange');
 },
+ get$keyPress: function() {
+  return this.operator$index$1('keypress');
+},
  get$click: function() {
   return this.operator$index$1('click');
 }
@@ -1429,6 +1691,9 @@ $$._ElementEventsImpl = {"":
   return this.operator$index$1('reset');
 },
  reset$0: function() { return this.get$reset().call$0(); },
+ get$keyPress: function() {
+  return this.operator$index$1('keypress');
+},
  get$click: function() {
   return this.operator$index$1('click');
 }
@@ -1581,6 +1846,9 @@ $$._SVGElementInstanceEventsImpl = {"":
   return this.operator$index$1('reset');
 },
  reset$0: function() { return this.get$reset().call$0(); },
+ get$keyPress: function() {
+  return this.operator$index$1('keypress');
+},
  get$click: function() {
   return this.operator$index$1('click');
 }
@@ -1593,7 +1861,13 @@ $$._SharedWorkerContextEventsImpl = {"":
 
 $$._SpeechRecognitionEventsImpl = {"":
  ["_ptr"],
- super: "_EventsImpl"
+ super: "_EventsImpl",
+ get$start: function() {
+  return this.operator$index$1('start');
+},
+ get$end: function() {
+  return this.operator$index$1('end');
+}
 };
 
 $$._TextTrackEventsImpl = {"":
@@ -1634,6 +1908,9 @@ $$._WindowEventsImpl = {"":
   return this.operator$index$1('reset');
 },
  reset$0: function() { return this.get$reset().call$0(); },
+ get$keyPress: function() {
+  return this.operator$index$1('keypress');
+},
  get$click: function() {
   return this.operator$index$1('click');
 }
@@ -1667,7 +1944,8 @@ $$._DOMWindowCrossFrameImpl = {"":
  super: "Object",
  close$0: function() {
   return $._DOMWindowCrossFrameImpl__close(this._window);
-}
+},
+ get$close: function() { return new $.BoundClosure(this, 'close$0'); }
 };
 
 $$._IDBOpenDBRequestEventsImpl = {"":
@@ -1715,7 +1993,7 @@ $$._VariableSizeListIterator = {"":
  super: "Object",
  next$0: function() {
   if (this.hasNext$0() !== true)
-    throw $.captureStackTrace($.CTC2);
+    throw $.captureStackTrace($.CTC1);
   var t1 = this._array;
   if (typeof t1 !== 'string' && (typeof t1 !== 'object' || t1 === null || t1 .constructor !== Array && !t1 .is$JavaScriptIndexingBehavior()))
     return this.next$0$bailout(1, t1, 0);
@@ -1743,7 +2021,7 @@ $$._VariableSizeListIterator = {"":
   switch (state) {
     case 0:
       if (this.hasNext$0() !== true)
-        throw $.captureStackTrace($.CTC2);
+        throw $.captureStackTrace($.CTC1);
       var t1 = this._array;
     case 1:
       state = 0;
@@ -2398,6 +2676,7 @@ $$._ReceivePortImpl = {"":
   this._callback = null;
   $._globalState().get$currentContext().unregister$1(this._id);
 },
+ get$close: function() { return new $.BoundClosure(this, 'close$0'); },
  receive$1: function(onMessage) {
   this._callback = onMessage;
 },
@@ -2439,10 +2718,10 @@ $$._Timer = {"":
  ["_handle", "_once"],
  super: "Object",
  _Timer$repeating$2: function(milliSeconds, callback) {
-  this._handle = $._window().setInterval$2(new $.anon0(this, callback), milliSeconds);
+  this._handle = $._window().setInterval$2(new $.anon1(this, callback), milliSeconds);
 },
  _Timer$2: function(milliSeconds, callback) {
-  this._handle = $._window().setTimeout$2(new $.anon(this, callback), milliSeconds);
+  this._handle = $._window().setTimeout$2(new $.anon0(this, callback), milliSeconds);
 }
 };
 
@@ -2869,7 +3148,7 @@ $$.JsonStringifier = {"":
     $.removeLast(this._seen);
     return;
   } else
-    throw $.captureStackTrace($.CTC5);
+    throw $.captureStackTrace($.CTC4);
 },
  _stringify$1$bailout: function(state, env0, env1) {
   switch (state) {
@@ -2949,7 +3228,7 @@ $$.JsonStringifier = {"":
                                       $.removeLast(this._seen);
                                       return;
                                     } else
-                                      throw $.captureStackTrace($.CTC5);
+                                      throw $.captureStackTrace($.CTC4);
                                 }
                           }
                     }
@@ -2970,6 +3249,15 @@ $$.JsonStringifier = {"":
 }
 };
 
+$$.main_anon = {"":
+ [],
+ super: "Closure",
+ call$1: function(e) {
+  if ($.eqB(e.get$keyCode(), 13))
+    $.WeatherTest$();
+}
+};
+
 $$.Maps__emitMap_anon = {"":
  ["result_3", "box_0", "visiting_2"],
  super: "Closure",
@@ -2983,28 +3271,35 @@ $$.Maps__emitMap_anon = {"":
 }
 };
 
-$$.login_anon = {"":
- ["user_2", "req_1", "timeOld_0"],
+$$.invokeClosure_anon = {"":
+ ["closure_0"],
  super: "Closure",
- call$1: function(e) {
-  if ($.eqB(this.req_1 .get$readyState(), 4)) {
-    if ($.eqB(this.req_1 .get$status(), 200)) {
-      $.query('#log_form').get$style().set$display('none');
-      $.query('#logged_user').get$style().set$display('');
-      var t1 = this.user_2;
-      $.query('#logged_user').set$text(t1);
-      $.query('#logout_button').get$style().set$display('');
-      $.query('#error').get$style().set$display('none');
-      $.print($.sub($.DateImplementation$now().millisecondsSinceEpoch, this.timeOld_0 .get$millisecondsSinceEpoch()));
-    } else if ($.eqB(this.req_1 .get$status(), 401)) {
-      $.print('Error: User/password is incorrect');
-      $.query('#error_text').set$text('User/password is incorrect');
-      $.query('#error').get$style().set$display('');
-    }
-    $.pets = $.add($.pets, 1);
-    if ($.ltB($.pets, 100))
-      $.login();
-  }
+ call$0: function() {
+  return this.closure_0 .call$0();
+}
+};
+
+$$.invokeClosure_anon0 = {"":
+ ["closure_2", "arg1_1"],
+ super: "Closure",
+ call$0: function() {
+  return this.closure_2 .call$1(this.arg1_1);
+}
+};
+
+$$.invokeClosure_anon1 = {"":
+ ["closure_5", "arg1_4", "arg2_3"],
+ super: "Closure",
+ call$0: function() {
+  return this.closure_5 .call$2(this.arg1_4, this.arg2_3);
+}
+};
+
+$$.anon = {"":
+ ["this_0"],
+ super: "Closure",
+ call$1: function(event$) {
+  this.this_0 .hideError$1(event$);
 }
 };
 
@@ -3039,6 +3334,70 @@ $$.JsonStringifier__stringify_anon = {"":
   $.add$1(this.this_2 .get$_sb(), '":');
   this.this_2 ._stringify$1(value);
   this.box_0 .first_1 = false;
+}
+};
+
+$$.WeatherController_logout_anon = {"":
+ ["this_1", "req_0"],
+ super: "Closure",
+ call$1: function(e) {
+  if ($.eqB(this.req_0 .get$readyState(), 4))
+    if ($.eqB(this.req_0 .get$status(), 200))
+      this.this_1 .get$view().logoutView$0();
+    else
+      $.print('Logout Error');
+}
+};
+
+$$.WeatherController_login_anon = {"":
+ ["this_1", "req_0"],
+ super: "Closure",
+ call$1: function(e) {
+  if ($.eqB(this.req_0 .get$readyState(), 4))
+    if ($.eqB(this.req_0 .get$status(), 200))
+      this.this_1 .get$view().loginSuccess$0();
+    else if ($.eqB(this.req_0 .get$status(), 401))
+      this.this_1 .get$view().loginError$0();
+}
+};
+
+$$.WeatherController_newQuery_anon = {"":
+ ["this_1", "req_0"],
+ super: "Closure",
+ call$1: function(e) {
+  if ($.eqB(this.req_0 .get$readyState(), 4))
+    if ($.eqB(this.req_0 .get$status(), 200)) {
+      var j = $.JSON_parse(this.req_0 .get$responseText());
+      var t1 = j.containsKey$1('result_json') === true;
+      var t2 = this.this_1;
+      if (t1) {
+        t2 .get$view().hideError$0();
+        this.this_1 .get$view().showJson$1($.index(j, 'result_json'));
+      } else
+        t2 .get$view().cityNotFoundError$0();
+    } else if ($.eqB(this.req_0 .get$status(), 401))
+      this.this_1 .get$view().notLoggedInError$0();
+}
+};
+
+$$.WeatherTest_testLogin_anon = {"":
+ ["this_2", "req_1", "n_0"],
+ super: "Closure",
+ call$1: function(e) {
+  if ($.eqB(this.req_1 .get$readyState(), 4)) {
+    var t1 = this.this_2;
+    t1 .set$l($.add(t1 .get$l(), 1));
+    if ($.eqB(this.this_2 .get$l(), this.n_0)) {
+      t1 = $.DateImplementation$now();
+      this.this_2 .set$end(t1);
+      t1 = $.sub(this.this_2 .get$end().get$millisecondsSinceEpoch(), this.this_2 .get$start().get$millisecondsSinceEpoch());
+      this.this_2 .set$elapsed(t1);
+      t1 = $.div(this.this_2 .get$elapsed(), this.n_0);
+      this.this_2 .set$average(t1);
+      $.print('Average time for ' + $.S(this.n_0) + ' logins = ' + $.S(this.this_2 .get$average()) + ' ms');
+      this.this_2 .testQuery$2(1000, 'Budapest');
+    }
+  }
 }
 };
 
@@ -3080,51 +3439,48 @@ $$.DateImplementation_toString_twoDigits = {"":
 }
 };
 
-$$.newQuery_anon = {"":
- ["req_1", "timeOld_0"],
+$$.WeatherTest_testQuery_anon = {"":
+ ["this_2", "req_1", "n_0"],
  super: "Closure",
  call$1: function(e) {
-  if ($.eqB(this.req_1 .get$readyState(), 4))
-    if ($.eqB(this.req_1 .get$status(), 200)) {
-      var j = $.JSON_parse(this.req_1 .get$responseText());
-      if (j.containsKey$1('result_json') === true) {
-        $.query('#error').get$style().set$display('none');
-        $.onSuccess(this.req_1, $.index(j, 'result_json'));
-      } else {
-        $.print('Error: City not found');
-        $.query('#error_text').set$text('City not found');
-        $.query('#error').get$style().set$display('');
-      }
-      $.print($.sub($.Clock_now(), this.timeOld_0));
-    } else if ($.eqB(this.req_1 .get$status(), 401)) {
-      $.print('Error: User not logged in');
-      $.query('#error_text').set$text('User not logged in');
-      $.query('#error').get$style().set$display('');
+  if ($.eqB(this.req_1 .get$readyState(), 4)) {
+    var t1 = this.this_2;
+    t1 .set$q($.add(t1 .get$q(), 1));
+    if ($.eqB(this.this_2 .get$q(), this.n_0)) {
+      t1 = $.DateImplementation$now();
+      this.this_2 .set$end(t1);
+      t1 = $.sub(this.this_2 .get$end().get$millisecondsSinceEpoch(), this.this_2 .get$start().get$millisecondsSinceEpoch());
+      this.this_2 .set$elapsed(t1);
+      t1 = $.div(this.this_2 .get$elapsed(), this.n_0);
+      this.this_2 .set$average(t1);
+      $.print('Average time for ' + $.S(this.n_0) + ' querys = ' + $.S(this.this_2 .get$average()) + ' ms');
+      this.this_2 .testQueryView$3(1000, 'Yokohama', 'Madrid');
     }
+  }
 }
 };
 
-$$.invokeClosure_anon = {"":
- ["closure_0"],
+$$.WeatherTest_testQueryView_anon = {"":
+ ["this_3", "box_0", "n_2"],
  super: "Closure",
- call$0: function() {
-  return this.closure_0 .call$0();
-}
-};
-
-$$.invokeClosure_anon0 = {"":
- ["closure_2", "arg1_1"],
- super: "Closure",
- call$0: function() {
-  return this.closure_2 .call$1(this.arg1_1);
-}
-};
-
-$$.invokeClosure_anon1 = {"":
- ["closure_5", "arg1_4", "arg2_3"],
- super: "Closure",
- call$0: function() {
-  return this.closure_5 .call$2(this.arg1_4, this.arg2_3);
+ call$1: function(e) {
+  if ($.eqB(this.box_0 .req_1 .get$readyState(), 4)) {
+    var t1 = this.this_3;
+    t1 .set$v($.add(t1 .get$v(), 1));
+    if ($.eqB(this.box_0 .req_1 .get$status(), 200)) {
+      var j = $.JSON_parse(this.box_0 .req_1 .get$responseText());
+      this.this_3 .get$view().showJson$1($.index(j, 'result_json'));
+    }
+    if ($.eqB(this.this_3 .get$v(), this.n_2)) {
+      t1 = $.DateImplementation$now();
+      this.this_3 .set$end(t1);
+      t1 = $.sub(this.this_3 .get$end().get$millisecondsSinceEpoch(), this.this_3 .get$start().get$millisecondsSinceEpoch());
+      this.this_3 .set$elapsed(t1);
+      t1 = $.div(this.this_3 .get$elapsed(), this.n_2);
+      this.this_3 .set$average(t1);
+      $.print('Average time for ' + $.S(this.n_2) + ' querys with view update = ' + $.S(this.this_3 .get$average()) + ' ms');
+    }
+  }
 }
 };
 
@@ -3339,14 +3695,6 @@ $$._EventLoop__runHelper_next = {"":
 }
 };
 
-$$.anon = {"":
- ["this_1", "callback_0"],
- super: "Closure",
- call$0: function() {
-  return this.callback_0 .call$1(this.this_1);
-}
-};
-
 $$.anon0 = {"":
  ["this_1", "callback_0"],
  super: "Closure",
@@ -3355,11 +3703,11 @@ $$.anon0 = {"":
 }
 };
 
-$$.Closure = {"":
- [],
- super: "Object",
- toString$0: function() {
-  return 'Closure';
+$$.anon1 = {"":
+ ["this_1", "callback_0"],
+ super: "Closure",
+ call$0: function() {
+  return this.callback_0 .call$1(this.this_1);
 }
 };
 
@@ -3368,8 +3716,39 @@ $$.BoundClosure = {'':
  'super': 'Closure',
 call$0: function() { return this.self[this.target](); }
 };
+$$.BoundClosure0 = {'':
+ ['self', 'target'],
+ 'super': 'Closure',
+call$1: function(p0) { return this.self[this.target](p0); }
+};
+$$.BoundClosure1 = {'':
+ ['self', 'target'],
+ 'super': 'Closure',
+call$2: function(p0, p1) { return this.self[this.target](p0, p1); }
+};
+$$.BoundClosure2 = {'':
+ ['self', 'target'],
+ 'super': 'Closure',
+call$2: function(p0, p1) { return this.self[this.target](p0, p1); },
+ call$0: function() {
+  return this.call$2(null,null)
+},
+ call$1: function(code) {
+  return this.call$2(code,null)
+}
+};
+$.div$slow = function(a, b) {
+  if ($.checkNumbers(a, b) === true)
+    return (a / b);
+  return a.operator$div$1(b);
+};
+
 $.MatchImplementation$ = function(pattern, str, _start, _end, _groups) {
   return new $.MatchImplementation(_groups, _end, _start, str, pattern);
+};
+
+$._InputElementEventsImpl$ = function(_ptr) {
+  return new $._InputElementEventsImpl(_ptr);
 };
 
 $.startsWith = function(receiver, other) {
@@ -3380,10 +3759,6 @@ $.startsWith = function(receiver, other) {
   if ($.gtB(length$, receiver.length))
     return false;
   return (other == (receiver.substring(0, length$)));
-};
-
-$._InputElementEventsImpl$ = function(_ptr) {
-  return new $._InputElementEventsImpl(_ptr);
 };
 
 $._NativeJsSendPort$ = function(_receivePort, isolateId) {
@@ -3448,12 +3823,12 @@ $.StackTrace$ = function(stack) {
   return new $.StackTrace(stack);
 };
 
-$.ObjectNotClosureException$ = function() {
-  return new $.ObjectNotClosureException();
-};
-
 $._MediaStreamTrackEventsImpl$ = function(_ptr) {
   return new $._MediaStreamTrackEventsImpl(_ptr);
+};
+
+$.ObjectNotClosureException$ = function() {
+  return new $.ObjectNotClosureException();
 };
 
 $._JsVisitedMap$ = function() {
@@ -3492,18 +3867,15 @@ $._fillStatics = function(context) {
 
 };
 
+$.print = function(obj) {
+  $.Primitives_printString(obj);
+};
+
 $.forEach = function(receiver, f) {
   if ($.isJsArray(receiver) !== true)
     return receiver.forEach$1(f);
   else
     return $.Collections_forEach(receiver, f);
-};
-
-$.print = function(obj) {
-  if (typeof obj === 'string')
-    $.Primitives_printString(obj);
-  else
-    $.Primitives_printString($.toString(obj));
 };
 
 $.Collections_forEach = function(iterable, f) {
@@ -3523,11 +3895,6 @@ $.StackOverflowException$ = function() {
   return new $.StackOverflowException();
 };
 
-$._Collections_forEach = function(iterable, f) {
-  for (var t1 = $.iterator(iterable); t1 .hasNext$0() === true;)
-    f.call$1(t1 .next$0());
-};
-
 $.isEmpty = function(receiver) {
   if (typeof receiver === 'string' || $.isJsArray(receiver) === true)
     return (receiver.length === 0);
@@ -3538,8 +3905,27 @@ $._DOMWindowCrossFrameImpl__close = function(win) {
 win.close()
 };
 
+$._Collections_forEach = function(iterable, f) {
+  for (var t1 = $.iterator(iterable); t1 .hasNext$0() === true;)
+    f.call$1(t1 .next$0());
+};
+
 $._IDBTransactionEventsImpl$ = function(_ptr) {
   return new $._IDBTransactionEventsImpl(_ptr);
+};
+
+$.dynamicFunction = function(name$) {
+  var f = ((Object.prototype[name$]));
+  if (!(f == null) && ((!!f.methods)))
+    return (f.methods);
+  var methods = (({}));
+  var dartMethod = ((Object.getPrototypeOf($.CTC7)[name$]));
+  if (!(dartMethod == null))
+    (methods['Object'] = dartMethod);
+  var bind = ((function() {return ($.dynamicBind.call$4)(this, name$, methods, Array.prototype.slice.call(arguments));}));
+  (bind.methods = methods);
+  $.defineProperty(((Object.prototype)), name$, bind);
+  return methods;
 };
 
 $.buildDynamicMetadata = function(inputTable) {
@@ -3568,20 +3954,6 @@ $.buildDynamicMetadata = function(inputTable) {
   }
   return result;
   var t1;
-};
-
-$.dynamicFunction = function(name$) {
-  var f = ((Object.prototype[name$]));
-  if (!(f == null) && ((!!f.methods)))
-    return (f.methods);
-  var methods = (({}));
-  var dartMethod = ((Object.getPrototypeOf($.CTC7)[name$]));
-  if (!(dartMethod == null))
-    (methods['Object'] = dartMethod);
-  var bind = ((function() {return ($.dynamicBind.call$4)(this, name$, methods, Array.prototype.slice.call(arguments));}));
-  (bind.methods = methods);
-  $.defineProperty(((Object.prototype)), name$, bind);
-  return methods;
 };
 
 $.toDouble = function(receiver) {
@@ -3629,7 +4001,7 @@ $.MathNatives_parseDouble = function(str) {
 
 $.captureStackTrace = function(ex) {
   if (ex == null)
-    ex = $.CTC1;
+    ex = $.CTC0;
   var jsError = ((new Error()));
   (jsError.dartException = ex);
   (jsError.toString = ($.toStringWrapper.call$0));
@@ -3717,6 +4089,13 @@ $._JsCopier$ = function() {
   return t1;
 };
 
+$._deserializeMessage = function(message) {
+  if ($._globalState().get$needSerialization() === true)
+    return $._JsDeserializer$().deserialize$1(message);
+  else
+    return message;
+};
+
 $._XMLHttpRequestEventsImpl$ = function(_ptr) {
   return new $._XMLHttpRequestEventsImpl(_ptr);
 };
@@ -3738,13 +4117,6 @@ $.and = function(a, b) {
   if ($.checkNumbers(a, b) === true)
     return ((a & b) >>> 0);
   return a.operator$and$1(b);
-};
-
-$._deserializeMessage = function(message) {
-  if ($._globalState().get$needSerialization() === true)
-    return $._JsDeserializer$().deserialize$1(message);
-  else
-    return message;
 };
 
 $._MediaStreamEventsImpl$ = function(_ptr) {
@@ -3832,6 +4204,10 @@ $.ListFactory_List = function(length$) {
   return $.Primitives_newList(length$);
 };
 
+$.document = function() {
+return document;
+};
+
 $.contains$1 = function(receiver, other) {
   if (!(typeof receiver === 'string'))
     return receiver.contains$1(other);
@@ -3848,11 +4224,6 @@ $._EventsImpl$ = function(_ptr) {
 
 $._BodyElementEventsImpl$ = function(_ptr) {
   return new $._BodyElementEventsImpl(_ptr);
-};
-
-$.onSuccess = function(req, parsedJSON) {
-  $.query('#content').get$style().set$display('');
-  $.showJson(parsedJSON);
 };
 
 $.Math_parseInt = function(str) {
@@ -3963,13 +4334,15 @@ $._JsonParser_parse = function(json) {
   return $._JsonParser$_internal(json)._parseToplevel$0();
 };
 
+$.iterator = function(receiver) {
+  if ($.isJsArray(receiver) === true)
+    return $.ListIterator$(receiver);
+  return receiver.iterator$0();
+};
+
 $.main = function() {
-  $.add$1($.query('#formulary').get$on().get$submit(), $.newQuery);
-  $.add$1($.query('#form_login').get$on().get$submit(), $.login_1);
-  $.add$1($.query('#logout').get$on().get$click(), $.logout);
-  $.add$1($.query('#close').get$on().get$click(), $.hideError);
-  $.query('#user_id').set$value('aitor');
-  $.query('#pass_id').set$value('aitor');
+  $.WeatherController$();
+  $.add$1($.document().get$on().get$keyPress(), new $.main_anon());
 };
 
 $.ceil = function(receiver) {
@@ -3980,12 +4353,6 @@ $.ceil = function(receiver) {
 
 $.Primitives_getYear = function(receiver) {
   return receiver.get$isUtc() === true ? (($.Primitives_lazyAsJsDate(receiver).getUTCFullYear())) : (($.Primitives_lazyAsJsDate(receiver).getFullYear()));
-};
-
-$.iterator = function(receiver) {
-  if ($.isJsArray(receiver) === true)
-    return $.ListIterator$(receiver);
-  return receiver.iterator$0();
 };
 
 $.Primitives_getHours = function(receiver) {
@@ -4027,18 +4394,6 @@ $.invokeClosure = function(closure, isolate, numberOfArguments, arg1, arg2) {
     throw $.captureStackTrace($.ExceptionImplementation$('Unsupported number of arguments for wrapped closure'));
 };
 
-$.newQuery = function(event$) {
-  var timeOld = $.Clock_now();
-  var city = $.query('#city').get$value();
-  var req = $._XMLHttpRequestFactoryProvider_XMLHttpRequest();
-  req.open$3('POST', 'http://192.168.1.63:8000/weather/querys/', true);
-  req.set$withCredentials(true);
-  $.add$1(req.get$on().get$readyStateChange(), new $.newQuery_anon(req, timeOld));
-  req.setRequestHeader$2('Content-Type', 'application/json');
-  req.send$1($.JSON_stringify($.makeLiteralMap(['city', city])));
-  event$.preventDefault$0();
-};
-
 $.MetaInfo$ = function(tag, tags, set) {
   return new $.MetaInfo(set, tags, tag);
 };
@@ -4077,6 +4432,10 @@ $.JsonStringifier__numberToString = function(x) {
     return $.toString(x);
   else
     return $.toString($.toDouble(x));
+};
+
+$.WeatherModel$ = function() {
+  return new $.WeatherModel();
 };
 
 $.abs = function(receiver) {
@@ -4126,6 +4485,22 @@ $.DateImplementation$fromMillisecondsSinceEpoch = function(millisecondsSinceEpoc
 $.dynamicSetMetadata = function(inputTable) {
   var t1 = $.buildDynamicMetadata(inputTable);
   $._dynamicMetadata(t1);
+};
+
+$.mod = function(a, b) {
+  if ($.checkNumbers(a, b) === true) {
+    var result = ((a % b));
+    if (result === 0)
+      return 0;
+    if (result > 0)
+      return result;
+    b = ((b));
+    if (b < 0)
+      return result - b;
+    else
+      return result + b;
+  }
+  return a.operator$mod$1(b);
 };
 
 $._IDBRequestEventsImpl$ = function(_ptr) {
@@ -4219,6 +4594,12 @@ $.typeNameInIE = function(obj) {
   return name$;
 };
 
+$.HashSetImplementation$ = function() {
+  var t1 = new $.HashSetImplementation(null);
+  t1 .HashSetImplementation$0();
+  return t1;
+};
+
 $.trim = function(receiver) {
   if (!(typeof receiver === 'string'))
     return receiver.trim$0();
@@ -4247,12 +4628,6 @@ $.Primitives_newList = function(length$) {
 
 $.ge = function(a, b) {
   return typeof a === 'number' && typeof b === 'number' ? ((a >= b)) : $.ge$slow(a, b);
-};
-
-$.HashSetImplementation$ = function() {
-  var t1 = new $.HashSetImplementation(null);
-  t1 .HashSetImplementation$0();
-  return t1;
 };
 
 $._globalState = function() {
@@ -4347,12 +4722,6 @@ $.Primitives_getMinutes = function(receiver) {
   return receiver.get$isUtc() === true ? (($.Primitives_lazyAsJsDate(receiver).getUTCMinutes())) : (($.Primitives_lazyAsJsDate(receiver).getMinutes()));
 };
 
-$.Primitives_lazyAsJsDate = function(receiver) {
-  if ((receiver.date === (void 0)))
-    (receiver.date = new Date(receiver.get$millisecondsSinceEpoch()));
-  return (receiver.date);
-};
-
 $._JsonParser$_internal = function(json) {
   var t1 = new $._JsonParser(0, $.get$length(json), json);
   t1 ._JsonParser$_internal$1(json);
@@ -4367,8 +4736,10 @@ $._FixedSizeListIterator$ = function(array) {
   return new $._FixedSizeListIterator($.get$length(array), 0, array);
 };
 
-$._MainManagerStub$ = function() {
-  return new $._MainManagerStub();
+$.Primitives_lazyAsJsDate = function(receiver) {
+  if ((receiver.date === (void 0)))
+    (receiver.date = new Date(receiver.get$millisecondsSinceEpoch()));
+  return (receiver.date);
 };
 
 $.JSSyntaxRegExp$_globalVersionOf = function(other) {
@@ -4377,6 +4748,10 @@ $.JSSyntaxRegExp$_globalVersionOf = function(other) {
   t1 = new $.JSSyntaxRegExp(other.get$ignoreCase(), t2, t1);
   t1 .JSSyntaxRegExp$_globalVersionOf$1(other);
   return t1;
+};
+
+$._MainManagerStub$ = function() {
+  return new $._MainManagerStub();
 };
 
 $._FileReaderEventsImpl$ = function(_ptr) {
@@ -4478,90 +4853,6 @@ $._document = function() {
 return document;
 };
 
-$.showJson = function(parsedJSON) {
-  var t1 = $.index($.index($.index($.index(parsedJSON, 'data'), 'request'), 0), 'query');
-  $.query('#city_name').set$text(t1);
-  var currentConditions = $.index($.index($.index(parsedJSON, 'data'), 'current_condition'), 0);
-  t1 = $.index(currentConditions, 'observation_time');
-  $.query('#observationTime').set$text(t1);
-  t1 = $.index($.index($.index(currentConditions, 'weatherDesc'), 0), 'value');
-  $.query('#description1').set$text(t1);
-  t1 = $.S($.index(currentConditions, 'temp_C')) + '\xbaC';
-  $.query('#tCelsius').set$text(t1);
-  t1 = $.S($.index(currentConditions, 'temp_F')) + '\xbaF';
-  $.query('#tFarenheit').set$text(t1);
-  t1 = $.S($.index(currentConditions, 'humidity')) + '%';
-  $.query('#humidity').set$text(t1);
-  t1 = $.S($.index(currentConditions, 'precipMM')) + ' MM';
-  $.query('#precipitation1').set$text(t1);
-  t1 = $.S($.index(currentConditions, 'cloudcover')) + '%';
-  $.query('#cloudcover').set$text(t1);
-  t1 = $.S($.index(currentConditions, 'visibility')) + 'Km';
-  $.query('#visibility').set$text(t1);
-  t1 = $.index(currentConditions, 'pressure');
-  $.query('#pressure').set$text(t1);
-  t1 = $.S($.index(currentConditions, 'winddirDegree')) + '\xba';
-  $.query('#windDirectionDegree1').set$text(t1);
-  t1 = $.index(currentConditions, 'winddir16Point');
-  $.query('#windDirection16Point1').set$text(t1);
-  t1 = $.S($.index(currentConditions, 'windspeedKmph')) + 'Kmph';
-  $.query('#windSpeedkmh1').set$text(t1);
-  t1 = $.S($.index(currentConditions, 'windspeedMiles')) + 'Mph';
-  $.query('#windSpeedMiles1').set$text(t1);
-  t1 = $.index($.index($.index(currentConditions, 'weatherIconUrl'), 0), 'value');
-  $.query('#img1').set$src(t1);
-  var weatherToday = $.index($.index($.index(parsedJSON, 'data'), 'weather'), 0);
-  t1 = $.index(weatherToday, 'date');
-  $.query('#dateToday').set$text(t1);
-  t1 = $.index($.index($.index(weatherToday, 'weatherDesc'), 0), 'value');
-  $.query('#description2').set$text(t1);
-  t1 = $.S($.index(weatherToday, 'tempMinC')) + '\xbaC';
-  $.query('#minTCelsius1').set$text(t1);
-  t1 = $.S($.index(weatherToday, 'tempMinF')) + '\xbaF';
-  $.query('#minTFarenheit1').set$text(t1);
-  t1 = $.S($.index(weatherToday, 'tempMaxC')) + '\xbaC';
-  $.query('#maxTCelsius1').set$text(t1);
-  t1 = $.S($.index(weatherToday, 'tempMaxF')) + '\xbaF';
-  $.query('#maxTFarenheit1').set$text(t1);
-  t1 = $.S($.index(weatherToday, 'precipMM')) + 'MM';
-  $.query('#precipitation2').set$text(t1);
-  t1 = $.S($.index(weatherToday, 'winddirDegree')) + '\xba';
-  $.query('#windDirectionDegree2').set$text(t1);
-  t1 = $.index(weatherToday, 'winddir16Point');
-  $.query('#windDirection16Point2').set$text(t1);
-  t1 = $.S($.index(weatherToday, 'windspeedKmph')) + 'Kmph';
-  $.query('#windSpeedkmh2').set$text(t1);
-  t1 = $.S($.index(weatherToday, 'windspeedMiles')) + 'Mph';
-  $.query('#windSpeedMiles2').set$text(t1);
-  t1 = $.index($.index($.index(weatherToday, 'weatherIconUrl'), 0), 'value');
-  $.query('#img2').set$src(t1);
-  var weatherTomorrow = $.index($.index($.index(parsedJSON, 'data'), 'weather'), 1);
-  t1 = $.index(weatherTomorrow, 'date');
-  $.query('#dateTomorrow').set$text(t1);
-  t1 = $.index($.index($.index(weatherTomorrow, 'weatherDesc'), 0), 'value');
-  $.query('#description3').set$text(t1);
-  t1 = $.S($.index(weatherTomorrow, 'tempMinC')) + '\xbaC';
-  $.query('#minTCelsius2').set$text(t1);
-  t1 = $.S($.index(weatherTomorrow, 'tempMinF')) + '\xbaF';
-  $.query('#minTFarenheit2').set$text(t1);
-  t1 = $.S($.index(weatherTomorrow, 'tempMaxC')) + '\xbaC';
-  $.query('#maxTCelsius2').set$text(t1);
-  t1 = $.S($.index(weatherTomorrow, 'tempMaxF')) + '\xbaF';
-  $.query('#maxTFarenheit2').set$text(t1);
-  t1 = $.S($.index(weatherTomorrow, 'precipMM')) + 'MM';
-  $.query('#precipitation3').set$text(t1);
-  t1 = $.S($.index(weatherTomorrow, 'winddirDegree')) + '\xba';
-  $.query('#windDirectionDegree3').set$text(t1);
-  t1 = $.index(weatherTomorrow, 'winddir16Point');
-  $.query('#windDirection16Point3').set$text(t1);
-  t1 = $.S($.index(weatherTomorrow, 'windspeedKmph')) + 'Kmph';
-  $.query('#windSpeedkmh3').set$text(t1);
-  t1 = $.S($.index(weatherTomorrow, 'windspeedMiles')) + 'Mph';
-  $.query('#windSpeedMiles3').set$text(t1);
-  t1 = $.index($.index($.index(weatherTomorrow, 'weatherIconUrl'), 0), 'value');
-  $.query('#img3').set$src(t1);
-};
-
 $._FrameSetElementEventsImpl$ = function(_ptr) {
   return new $._FrameSetElementEventsImpl(_ptr);
 };
@@ -4612,12 +4903,12 @@ $.split = function(receiver, pattern) {
   return $.stringSplitUnchecked(receiver, pattern);
 };
 
-$._timerFactory = function(millis, callback, repeating) {
-  return repeating === true ? $._Timer$repeating(millis, callback) : $._Timer$(millis, callback);
-};
-
 $._IDBDatabaseEventsImpl$ = function(_ptr) {
   return new $._IDBDatabaseEventsImpl(_ptr);
+};
+
+$._timerFactory = function(millis, callback, repeating) {
+  return repeating === true ? $._Timer$repeating(millis, callback) : $._Timer$(millis, callback);
 };
 
 $.allMatches = function(receiver, str) {
@@ -4654,10 +4945,6 @@ $.ltB = function(a, b) {
   return typeof a === 'number' && typeof b === 'number' ? ((a < b)) : $.lt$slow(a, b) === true;
 };
 
-$.Clock_now = function() {
-  return $.Primitives_dateNow();
-};
-
 $.tdiv = function(a, b) {
   if ($.checkNumbers(a, b) === true)
     return $.truncate(((a)) / ((b)));
@@ -4675,7 +4962,7 @@ $.unwrapException = function(ex) {
       if (typeof name$ === 'string' && $.startsWith(name$, 'call$') === true)
         return $.ObjectNotClosureException$();
       else
-        return $.NullPointerException$(null, $.CTC0);
+        return $.NullPointerException$(null, $.CTC);
     else if ($.eqB(type, 'undefined_method'))
       if (typeof name$ === 'string' && $.startsWith(name$, 'call$') === true)
         return $.ObjectNotClosureException$();
@@ -4683,7 +4970,7 @@ $.unwrapException = function(ex) {
         return $.NoSuchMethodException$('', name$, [], null);
     if (typeof message === 'string')
       if ($.endsWith(message, 'is null') === true || $.endsWith(message, 'is undefined') === true || $.endsWith(message, 'is null or undefined') === true)
-        return $.NullPointerException$(null, $.CTC0);
+        return $.NullPointerException$(null, $.CTC);
       else if ($.endsWith(message, 'is not a function') === true)
         return $.NoSuchMethodException$('', '<unknown>', [], null);
     return $.ExceptionImplementation$(typeof message === 'string' ? message : '');
@@ -4741,41 +5028,18 @@ $.S = function(value) {
   return res;
 };
 
-$.checkString = function(value) {
-  if (!(typeof value === 'string')) {
-    $.checkNull(value);
-    throw $.captureStackTrace($.IllegalArgumentException$(value));
-  }
-  return value;
-};
-
 $._DoubleLinkedQueueIterator$ = function(_sentinel) {
   var t1 = new $._DoubleLinkedQueueIterator(null, _sentinel);
   t1 ._DoubleLinkedQueueIterator$1(_sentinel);
   return t1;
 };
 
-$.Arrays_indexOf = function(a, element, startIndex, endIndex) {
-  if (typeof a !== 'string' && (typeof a !== 'object' || a === null || a.constructor !== Array && !a.is$JavaScriptIndexingBehavior()))
-    return $.Arrays_indexOf$bailout(1, a, element, startIndex, endIndex);
-  if (typeof endIndex !== 'number')
-    return $.Arrays_indexOf$bailout(1, a, element, startIndex, endIndex);
-  if ($.geB(startIndex, a.length))
-    return -1;
-  if ($.ltB(startIndex, 0))
-    startIndex = 0;
-  if (typeof startIndex !== 'number')
-    return $.Arrays_indexOf$bailout(2, a, element, startIndex, endIndex);
-  for (var i = startIndex; i < endIndex; ++i) {
-    if (i !== (i | 0))
-      throw $.iae(i);
-    var t1 = a.length;
-    if (i < 0 || i >= t1)
-      throw $.ioore(i);
-    if ($.eqB(a[i], element))
-      return i;
+$.checkString = function(value) {
+  if (!(typeof value === 'string')) {
+    $.checkNull(value);
+    throw $.captureStackTrace($.IllegalArgumentException$(value));
   }
-  return -1;
+  return value;
 };
 
 $._Lists_indexOf = function(a, element, startIndex, endIndex) {
@@ -4887,6 +5151,21 @@ $.Primitives_stringFromCharCodes = function(charCodes) {
   return (String.fromCharCode.apply(null, charCodes));
 };
 
+$.toString = function(value) {
+  if ((typeof value == "object" && value !== null))
+    if ($.isJsArray(value) === true)
+      return $.Collections_collectionToString(value);
+    else
+      return value.toString$0();
+  if ((value === 0 && (1 / value) < 0))
+    return '-0.0';
+  if (value == null)
+    return 'null';
+  if ((typeof value == "function"))
+    return 'Closure';
+  return (String(value));
+};
+
 $._AudioContextEventsImpl$ = function(_ptr) {
   return new $._AudioContextEventsImpl(_ptr);
 };
@@ -4996,23 +5275,31 @@ $.add$slow = function(a, b) {
   return a.operator$add$1(b);
 };
 
-$.IllegalArgumentException$ = function(arg) {
-  return new $.IllegalArgumentException(arg);
+$.Arrays_indexOf = function(a, element, startIndex, endIndex) {
+  if (typeof a !== 'string' && (typeof a !== 'object' || a === null || a.constructor !== Array && !a.is$JavaScriptIndexingBehavior()))
+    return $.Arrays_indexOf$bailout(1, a, element, startIndex, endIndex);
+  if (typeof endIndex !== 'number')
+    return $.Arrays_indexOf$bailout(1, a, element, startIndex, endIndex);
+  if ($.geB(startIndex, a.length))
+    return -1;
+  if ($.ltB(startIndex, 0))
+    startIndex = 0;
+  if (typeof startIndex !== 'number')
+    return $.Arrays_indexOf$bailout(2, a, element, startIndex, endIndex);
+  for (var i = startIndex; i < endIndex; ++i) {
+    if (i !== (i | 0))
+      throw $.iae(i);
+    var t1 = a.length;
+    if (i < 0 || i >= t1)
+      throw $.ioore(i);
+    if ($.eqB(a[i], element))
+      return i;
+  }
+  return -1;
 };
 
-$.toString = function(value) {
-  if ((typeof value == "object" && value !== null))
-    if ($.isJsArray(value) === true)
-      return $.Collections_collectionToString(value);
-    else
-      return value.toString$0();
-  if ((value === 0 && (1 / value) < 0))
-    return '-0.0';
-  if (value == null)
-    return 'null';
-  if ((typeof value == "function"))
-    return 'Closure';
-  return (String(value));
+$.IllegalArgumentException$ = function(arg) {
+  return new $.IllegalArgumentException(arg);
 };
 
 $._AllMatchesIterable$ = function(_re, _str) {
@@ -5031,7 +5318,7 @@ $.Futures_wait = function(futures) {
   if (typeof futures !== 'string' && (typeof futures !== 'object' || futures === null || futures.constructor !== Array && !futures.is$JavaScriptIndexingBehavior()))
     return $.Futures_wait$bailout(1, futures, t1);
   if ($.isEmpty(futures) === true) {
-    t1 = $.FutureImpl_FutureImpl$immediate($.CTC0);
+    t1 = $.FutureImpl_FutureImpl$immediate($.CTC);
     $.setRuntimeTypeInfo(t1, (({T: 'List'})));
     return t1;
   }
@@ -5053,7 +5340,7 @@ $.Futures_wait = function(futures) {
 
 $.checkNull = function(object) {
   if (object == null)
-    throw $.captureStackTrace($.NullPointerException$(null, $.CTC0));
+    throw $.captureStackTrace($.NullPointerException$(null, $.CTC));
   return object;
 };
 
@@ -5097,6 +5384,10 @@ $.index$slow = function(a, index) {
   return a.operator$index$1(index);
 };
 
+$.div = function(a, b) {
+  return typeof a === 'number' && typeof b === 'number' ? ((a / b)) : $.div$slow(a, b);
+};
+
 $.Collections__containsRef = function(c, ref) {
   for (var t1 = $.iterator(c); t1 .hasNext$0() === true;) {
     var t2 = t1 .next$0();
@@ -5106,28 +5397,8 @@ $.Collections__containsRef = function(c, ref) {
   return false;
 };
 
-$.login = function() {
-  var timeOld = $.DateImplementation$now();
-  var req = $._XMLHttpRequestFactoryProvider_XMLHttpRequest();
-  req.open$3('POST', 'http://192.168.1.63:8000/weather/login/', true);
-  req.set$withCredentials(true);
-  var user = $.query('#user_id').get$value();
-  var pass = $.query('#pass_id').get$value();
-  $.add$1(req.get$on().get$readyStateChange(), new $.login_anon(user, req, timeOld));
-  req.send$1($.JSON_stringify($.makeLiteralMap(['username', user, 'password', pass])));
-};
-
-$.hideError = function(event$) {
-  $.query('#error').get$style().set$display('none');
-};
-
 $._MediaElementEventsImpl$ = function(_ptr) {
   return new $._MediaElementEventsImpl(_ptr);
-};
-
-$.login_1 = function(event$) {
-  event$.preventDefault$0();
-  $.login();
 };
 
 $._MessagePortEventsImpl$ = function(_ptr) {
@@ -5166,6 +5437,12 @@ $._MessageTraverser_isPrimitive = function(x) {
 
 $._BatteryManagerEventsImpl$ = function(_ptr) {
   return new $._BatteryManagerEventsImpl(_ptr);
+};
+
+$.WeatherTest$ = function() {
+  var t1 = new $.WeatherTest(null, null, null, null, null, null, null, null, null);
+  t1 .WeatherTest$0();
+  return t1;
 };
 
 $._IDBOpenDBRequestEventsImpl$ = function(_ptr) {
@@ -5255,24 +5532,18 @@ $._MessageTraverserVisitedMap$ = function() {
   return new $._MessageTraverserVisitedMap();
 };
 
-$.logout = function(event$) {
-  var req = $._XMLHttpRequestFactoryProvider_XMLHttpRequest();
-  req.open$3('POST', 'http://192.168.1.63:8000/weather/logout/', true);
-  req.set$withCredentials(true);
-  req.send$0();
-  $.query('#log_form').get$style().set$display('');
-  $.query('#logged_user').get$style().set$display('none');
-  $.query('#logout_button').get$style().set$display('none');
-  $.query('#content').get$style().set$display('none');
-  $.query('#error').get$style().set$display('none');
-};
-
 $.Primitives_dateNow = function() {
   return (Date.now());
 };
 
 $.FutureNotCompleteException$ = function() {
   return new $.FutureNotCompleteException();
+};
+
+$.WeatherView$ = function() {
+  var t1 = new $.WeatherView(null, null, null, null, null, null);
+  t1 .WeatherView$0();
+  return t1;
 };
 
 $._JsSerializer$ = function() {
@@ -5299,6 +5570,12 @@ $._XMLHttpRequestUploadEventsImpl$ = function(_ptr) {
 $.LinkedHashMapImplementation$ = function() {
   var t1 = new $.LinkedHashMapImplementation(null, null);
   t1 .LinkedHashMapImplementation$0();
+  return t1;
+};
+
+$.WeatherController$ = function() {
+  var t1 = new $.WeatherController(null, null);
+  t1 .WeatherController$0();
   return t1;
 };
 
@@ -5349,6 +5626,10 @@ $.stringContainsUnchecked = function(receiver, other, startIndex) {
     return $.iterator($.allMatches(other, $.substring$1(receiver, startIndex))).hasNext$0();
 };
 
+$.Primitives_objectToString = function(object) {
+  return 'Instance of \'' + $.S($.Primitives_objectTypeName(object)) + '\'';
+};
+
 $.shl = function(a, b) {
   if ($.checkNumbers(a, b) === true) {
     a = ((a));
@@ -5360,10 +5641,6 @@ $.shl = function(a, b) {
     return ((a << b) >>> 0);
   }
   return a.operator$shl$1(b);
-};
-
-$.Primitives_objectToString = function(object) {
-  return 'Instance of \'' + $.S($.Primitives_objectTypeName(object)) + '\'';
 };
 
 $._currentIsolate = function() {
@@ -5384,13 +5661,13 @@ $._Manager$ = function() {
   return t1;
 };
 
+$._NotificationEventsImpl$ = function(_ptr) {
+  return new $._NotificationEventsImpl(_ptr);
+};
+
 $.regExpGetNative = function(regExp) {
   var r = ((regExp._re));
   return r == null ? ((regExp._re = $.regExpMakeNative(regExp, false))) : r;
-};
-
-$._NotificationEventsImpl$ = function(_ptr) {
-  return new $._NotificationEventsImpl(_ptr);
 };
 
 $.sub = function(a, b) {
@@ -5558,7 +5835,7 @@ $.allMatchesInStringUnchecked$bailout = function(state, needle, haystack, length
 $.Futures_wait$bailout = function(state, futures, t1) {
   ;
   if ($.isEmpty(futures) === true) {
-    t1 = $.FutureImpl_FutureImpl$immediate($.CTC0);
+    t1 = $.FutureImpl_FutureImpl$immediate($.CTC);
     $.setRuntimeTypeInfo(t1, (({T: 'List'})));
     return t1;
   }
@@ -5575,36 +5852,28 @@ $.Futures_wait$bailout = function(state, futures, t1) {
   return result;
 };
 
-$.toStringWrapper.call$0 = $.toStringWrapper;
-$.toStringWrapper.$name = "toStringWrapper";
-$.hideError.call$1 = $.hideError;
-$.hideError.$name = "hideError";
-$.constructorNameFallback.call$1 = $.constructorNameFallback;
-$.constructorNameFallback.$name = "constructorNameFallback";
-$.typeNameInIE.call$1 = $.typeNameInIE;
-$.typeNameInIE.$name = "typeNameInIE";
-$.newQuery.call$1 = $.newQuery;
-$.newQuery.$name = "newQuery";
-$.throwNoSuchMethod.call$3 = $.throwNoSuchMethod;
-$.throwNoSuchMethod.$name = "throwNoSuchMethod";
-$.dynamicBind.call$4 = $.dynamicBind;
-$.dynamicBind.$name = "dynamicBind";
-$.typeNameInFirefox.call$1 = $.typeNameInFirefox;
-$.typeNameInFirefox.$name = "typeNameInFirefox";
-$.login_1.call$1 = $.login_1;
-$.login_1.$name = "login_1";
-$.typeNameInSafari.call$1 = $.typeNameInSafari;
-$.typeNameInSafari.$name = "typeNameInSafari";
-$.typeNameInOpera.call$1 = $.typeNameInOpera;
-$.typeNameInOpera.$name = "typeNameInOpera";
-$.typeNameInChrome.call$1 = $.typeNameInChrome;
-$.typeNameInChrome.$name = "typeNameInChrome";
-$.invokeClosure.call$5 = $.invokeClosure;
-$.invokeClosure.$name = "invokeClosure";
 $._timerFactory.call$3 = $._timerFactory;
 $._timerFactory.$name = "_timerFactory";
-$.logout.call$1 = $.logout;
-$.logout.$name = "logout";
+$.dynamicBind.call$4 = $.dynamicBind;
+$.dynamicBind.$name = "dynamicBind";
+$.toStringWrapper.call$0 = $.toStringWrapper;
+$.toStringWrapper.$name = "toStringWrapper";
+$.typeNameInFirefox.call$1 = $.typeNameInFirefox;
+$.typeNameInFirefox.$name = "typeNameInFirefox";
+$.typeNameInSafari.call$1 = $.typeNameInSafari;
+$.typeNameInSafari.$name = "typeNameInSafari";
+$.constructorNameFallback.call$1 = $.constructorNameFallback;
+$.constructorNameFallback.$name = "constructorNameFallback";
+$.typeNameInChrome.call$1 = $.typeNameInChrome;
+$.typeNameInChrome.$name = "typeNameInChrome";
+$.typeNameInIE.call$1 = $.typeNameInIE;
+$.typeNameInIE.$name = "typeNameInIE";
+$.invokeClosure.call$5 = $.invokeClosure;
+$.invokeClosure.$name = "invokeClosure";
+$.throwNoSuchMethod.call$3 = $.throwNoSuchMethod;
+$.throwNoSuchMethod.$name = "throwNoSuchMethod";
+$.typeNameInOpera.call$1 = $.typeNameInOpera;
+$.typeNameInOpera.$name = "typeNameInOpera";
 Isolate.$finishClasses($$);
 $$ = {};
 Isolate.makeConstantList = function(list) {
@@ -5612,16 +5881,15 @@ Isolate.makeConstantList = function(list) {
   list.fixed$length = true;
   return list;
 };
-$.CTC0 = Isolate.makeConstantList([]);
+$.CTC = Isolate.makeConstantList([]);
 $.CTC7 = new Isolate.$isolateProperties.Object();
 $.CTC6 = new Isolate.$isolateProperties.JSSyntaxRegExp(false, false, 'Chrome|DumpRenderTree');
-$.CTC5 = new Isolate.$isolateProperties.JsonUnsupportedObjectType();
-$.CTC4 = new Isolate.$isolateProperties._DeletedKeySentinel();
-$.CTC = new Isolate.$isolateProperties.JSSyntaxRegExp(false, false, '^#[_a-zA-Z]\\w*$');
-$.CTC1 = new Isolate.$isolateProperties.NullPointerException(Isolate.$isolateProperties.CTC0, null);
-$.CTC2 = new Isolate.$isolateProperties.NoMoreElementsException();
-$.CTC3 = new Isolate.$isolateProperties.EmptyQueueException();
-$.pets = 0;
+$.CTC3 = new Isolate.$isolateProperties._DeletedKeySentinel();
+$.CTC5 = new Isolate.$isolateProperties.JSSyntaxRegExp(false, false, '^#[_a-zA-Z]\\w*$');
+$.CTC0 = new Isolate.$isolateProperties.NullPointerException(Isolate.$isolateProperties.CTC, null);
+$.CTC4 = new Isolate.$isolateProperties.JsonUnsupportedObjectType();
+$.CTC1 = new Isolate.$isolateProperties.NoMoreElementsException();
+$.CTC2 = new Isolate.$isolateProperties.EmptyQueueException();
 $._ReceivePortImpl__nextFreeId = 1;
 $._TimerFactory__factory = null;
 $._JsonParser_tokens = null;
@@ -5733,7 +6001,7 @@ $.$defineNativeClass('HTMLBodyElement', [], {
 }
 });
 
-$.$defineNativeClass('HTMLButtonElement', ["value="], {
+$.$defineNativeClass('HTMLButtonElement', ["value=", "form?"], {
 });
 
 $.$defineNativeClass('CSSFontFaceRule', ["style?"], {
@@ -5905,7 +6173,7 @@ $.$defineNativeClass('HTMLDetailsElement', [], {
 
 $.$defineNativeClass('HTMLDocument', ["readyState?"], {
  query$1: function(selectors) {
-  if ($.CTC.hasMatch$1(selectors) === true)
+  if ($.CTC5 .hasMatch$1(selectors) === true)
     return this.$dom_getElementById$1($.substring$1(selectors, 1));
   return this.$dom_querySelector$1(selectors);
 },
@@ -6011,6 +6279,7 @@ $.$defineNativeClass('EventSource', ["readyState?"], {
  close$0: function() {
   return (this.close());
 },
+ get$close: function() { return new $.BoundClosure(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -6050,6 +6319,9 @@ $.$defineNativeClass('EventTarget', [], {
   }
 
 }
+});
+
+$.$defineNativeClass('HTMLFieldSetElement', ["form?"], {
 });
 
 $.$defineNativeClass('FileException', [], {
@@ -6283,6 +6555,7 @@ $.$defineNativeClass('IDBDatabase', [], {
  close$0: function() {
   return (this.close());
 },
+ get$close: function() { return new $.BoundClosure(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -6373,7 +6646,7 @@ $.$defineNativeClass('HTMLImageElement', ["src!"], {
  complete$1: function(arg0) { return this.complete.call$1(arg0); }
 });
 
-$.$defineNativeClass('HTMLInputElement', ["value=", "src!", "pattern?"], {
+$.$defineNativeClass('HTMLInputElement', ["value=", "src!", "pattern?", "form?"], {
  get$on: function() {
   return $._InputElementEventsImpl$(this);
 }
@@ -6496,7 +6769,16 @@ $.$defineNativeClass('JavaScriptAudioNode', [], {
 }
 });
 
+$.$defineNativeClass('HTMLKeygenElement', ["form?"], {
+});
+
 $.$defineNativeClass('HTMLLIElement', ["value="], {
+});
+
+$.$defineNativeClass('HTMLLabelElement', ["form?"], {
+});
+
+$.$defineNativeClass('HTMLLegendElement', ["form?"], {
 });
 
 $.$defineNativeClass('LocalMediaStream', [], {
@@ -6512,6 +6794,13 @@ $.$defineNativeClass('Location', [], {
  toString$0: function() {
   return (this.toString());
 }
+});
+
+$.$defineNativeClass('HTMLMarqueeElement', [], {
+ start$0: function() {
+  return (this.start());
+},
+ get$start: function() { return new $.BoundClosure(this, 'start$0'); }
 });
 
 $.$defineNativeClass('MediaController', [], {
@@ -6627,6 +6916,10 @@ $.$defineNativeClass('MessageEvent', ["ports?"], {
 });
 
 $.$defineNativeClass('MessagePort', [], {
+ start$0: function() {
+  return (this.start());
+},
+ get$start: function() { return new $.BoundClosure(this, 'start$0'); },
  $dom_removeEventListener$3: function(type, listener, useCapture) {
   return (this.removeEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -6639,6 +6932,7 @@ $.$defineNativeClass('MessagePort', [], {
  close$0: function() {
   return (this.close());
 },
+ get$close: function() { return new $.BoundClosure(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -6775,6 +7069,7 @@ $.$defineNativeClass('Notification', ["tag?"], {
  close$0: function() {
   return (this.close());
 },
+ get$close: function() { return new $.BoundClosure(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -6783,10 +7078,16 @@ $.$defineNativeClass('Notification', ["tag?"], {
 }
 });
 
-$.$defineNativeClass('HTMLOptionElement', ["value="], {
+$.$defineNativeClass('HTMLOListElement', ["start?"], {
 });
 
-$.$defineNativeClass('HTMLOutputElement', ["value="], {
+$.$defineNativeClass('HTMLObjectElement', ["form?"], {
+});
+
+$.$defineNativeClass('HTMLOptionElement', ["value=", "form?"], {
+});
+
+$.$defineNativeClass('HTMLOutputElement', ["value=", "form?"], {
 });
 
 $.$defineNativeClass('HTMLParamElement', ["value="], {
@@ -6799,6 +7100,7 @@ $.$defineNativeClass('PeerConnection00', ["readyState?"], {
  close$0: function() {
   return (this.close());
 },
+ get$close: function() { return new $.BoundClosure(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -6899,7 +7201,7 @@ $.$defineNativeClass('SVGTransformList', [], {
 $.$defineNativeClass('HTMLScriptElement', ["src!"], {
 });
 
-$.$defineNativeClass('HTMLSelectElement', ["value=", "length="], {
+$.$defineNativeClass('HTMLSelectElement', ["value=", "length=", "form?"], {
 });
 
 $.$defineNativeClass('SharedWorkerContext', [], {
@@ -6930,6 +7232,10 @@ $.$defineNativeClass('SpeechInputResultList', ["length?"], {
 });
 
 $.$defineNativeClass('SpeechRecognition', [], {
+ start$0: function() {
+  return (this.start());
+},
+ get$start: function() { return new $.BoundClosure(this, 'start$0'); },
  $dom_removeEventListener$3: function(type, listener, useCapture) {
   return (this.removeEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -7048,7 +7354,7 @@ return this[index];
  is$Collection: function() { return true; }
 });
 
-$.$defineNativeClass('HTMLTextAreaElement', ["value="], {
+$.$defineNativeClass('HTMLTextAreaElement', ["value=", "form?"], {
 });
 
 $.$defineNativeClass('TextTrack', [], {
@@ -7091,6 +7397,14 @@ $.$defineNativeClass('TextTrackList', ["length?"], {
 });
 
 $.$defineNativeClass('TimeRanges', ["length?"], {
+ start$1: function(index) {
+  return (this.start(index));
+},
+ get$start: function() { return new $.BoundClosure0(this, 'start$1'); },
+ end$1: function(index) {
+  return (this.end(index));
+},
+ get$end: function() { return new $.BoundClosure0(this, 'end$1'); }
 });
 
 $.$defineNativeClass('TouchList', ["length?"], {
@@ -7129,6 +7443,9 @@ return this[index];
 });
 
 $.$defineNativeClass('HTMLTrackElement', ["src!", "readyState?"], {
+});
+
+$.$defineNativeClass('UIEvent', ["view?", "keyCode?"], {
 });
 
 $.$defineNativeClass('Uint16Array', ["length?"], {
@@ -7254,6 +7571,7 @@ $.$defineNativeClass('WebSocket', ["readyState?"], {
  close$0: function() {
   return this.close();
 },
+ get$close: function() { return new $.BoundClosure2(this, 'close$2'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -7275,6 +7593,7 @@ $.$defineNativeClass('DOMWindow', ["status?", "length?"], {
  close$0: function() {
   return (this.close());
 },
+ get$close: function() { return new $.BoundClosure(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -7314,6 +7633,7 @@ $.$defineNativeClass('WorkerContext', [], {
  close$0: function() {
   return (this.close());
 },
+ get$close: function() { return new $.BoundClosure(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -7416,7 +7736,7 @@ $.$defineNativeClass('DOMWindow', [], {
 }
 });
 
-// 154 dynamic classes.
+// 162 dynamic classes.
 // 337 classes
 // 31 !leaf
 (function(){
@@ -7431,6 +7751,7 @@ $.$defineNativeClass('DOMWindow', [], {
   var v8/*class(_MediaStreamImpl)*/ = 'MediaStream|LocalMediaStream|LocalMediaStream';
   var v9/*class(_IDBRequestImpl)*/ = 'IDBRequest|IDBOpenDBRequest|IDBVersionChangeRequest|IDBOpenDBRequest|IDBVersionChangeRequest';
   var v10/*class(_AbstractWorkerImpl)*/ = 'AbstractWorker|Worker|SharedWorker|Worker|SharedWorker';
+  var v11/*class(_UIEventImpl)*/ = 'UIEvent|TouchEvent|TextEvent|SVGZoomEvent|MouseEvent|WheelEvent|WheelEvent|KeyboardEvent|CompositionEvent|TouchEvent|TextEvent|SVGZoomEvent|MouseEvent|WheelEvent|WheelEvent|KeyboardEvent|CompositionEvent';
   var table = [
     // [dynamic-dispatch-tag, tags of classes implementing dynamic-dispatch-tag]
     ['WorkerContext', v6/*class(_WorkerContextImpl)*/],
@@ -7447,6 +7768,7 @@ $.$defineNativeClass('DOMWindow', [], {
     ['EventTarget', [v6/*class(_WorkerContextImpl)*/,v7/*class(_NodeImpl)*/,v8/*class(_MediaStreamImpl)*/,v9/*class(_IDBRequestImpl)*/,v10/*class(_AbstractWorkerImpl)*/,v6/*class(_WorkerContextImpl)*/,v7/*class(_NodeImpl)*/,v8/*class(_MediaStreamImpl)*/,v9/*class(_IDBRequestImpl)*/,v10/*class(_AbstractWorkerImpl)*/,'EventTarget|XMLHttpRequestUpload|XMLHttpRequest|DOMWindow|WebSocket|TextTrackList|TextTrackCue|TextTrack|SpeechRecognition|SourceBufferList|Performance|PeerConnection00|Notification|MessagePort|MediaStreamTrackList|MediaStreamTrack|MediaController|IDBTransaction|IDBDatabase|FileWriter|FileReader|EventSource|DOMApplicationCache|BatteryManager|AudioContext|XMLHttpRequestUpload|XMLHttpRequest|DOMWindow|WebSocket|TextTrackList|TextTrackCue|TextTrack|SpeechRecognition|SourceBufferList|Performance|PeerConnection00|Notification|MessagePort|MediaStreamTrackList|MediaStreamTrack|MediaController|IDBTransaction|IDBDatabase|FileWriter|FileReader|EventSource|DOMApplicationCache|BatteryManager|AudioContext'].join('|')],
     ['HTMLCollection', 'HTMLCollection|HTMLOptionsCollection|HTMLOptionsCollection'],
     ['IDBCursor', 'IDBCursor|IDBCursorWithValue|IDBCursorWithValue'],
+    ['UIEvent', v11/*class(_UIEventImpl)*/],
     ['NodeList', 'NodeList|RadioNodeList|RadioNodeList'],
     ['Uint8Array', 'Uint8Array|Uint8ClampedArray|Uint8ClampedArray'],
     ['AudioParam', 'AudioParam|AudioGain|AudioGain'],
@@ -7454,7 +7776,7 @@ $.$defineNativeClass('DOMWindow', [], {
     ['DOMTokenList', 'DOMTokenList|DOMSettableTokenList|DOMSettableTokenList'],
     ['Entry', 'Entry|FileEntry|DirectoryEntry|FileEntry|DirectoryEntry'],
     ['EntrySync', 'EntrySync|FileEntrySync|DirectoryEntrySync|FileEntrySync|DirectoryEntrySync'],
-    ['Event', 'Event|WebGLContextEvent|UIEvent|TouchEvent|TextEvent|SVGZoomEvent|MouseEvent|WheelEvent|WheelEvent|KeyboardEvent|CompositionEvent|TouchEvent|TextEvent|SVGZoomEvent|MouseEvent|WheelEvent|WheelEvent|KeyboardEvent|CompositionEvent|WebKitTransitionEvent|TrackEvent|StorageEvent|SpeechRecognitionEvent|SpeechRecognitionError|SpeechInputEvent|ProgressEvent|XMLHttpRequestProgressEvent|XMLHttpRequestProgressEvent|PopStateEvent|PageTransitionEvent|OverflowEvent|OfflineAudioCompletionEvent|MutationEvent|MessageEvent|MediaStreamTrackEvent|MediaStreamEvent|MediaKeyEvent|IDBVersionChangeEvent|HashChangeEvent|ErrorEvent|DeviceOrientationEvent|DeviceMotionEvent|CustomEvent|CloseEvent|BeforeLoadEvent|AudioProcessingEvent|WebKitAnimationEvent|WebGLContextEvent|UIEvent|TouchEvent|TextEvent|SVGZoomEvent|MouseEvent|WheelEvent|WheelEvent|KeyboardEvent|CompositionEvent|TouchEvent|TextEvent|SVGZoomEvent|MouseEvent|WheelEvent|WheelEvent|KeyboardEvent|CompositionEvent|WebKitTransitionEvent|TrackEvent|StorageEvent|SpeechRecognitionEvent|SpeechRecognitionError|SpeechInputEvent|ProgressEvent|XMLHttpRequestProgressEvent|XMLHttpRequestProgressEvent|PopStateEvent|PageTransitionEvent|OverflowEvent|OfflineAudioCompletionEvent|MutationEvent|MessageEvent|MediaStreamTrackEvent|MediaStreamEvent|MediaKeyEvent|IDBVersionChangeEvent|HashChangeEvent|ErrorEvent|DeviceOrientationEvent|DeviceMotionEvent|CustomEvent|CloseEvent|BeforeLoadEvent|AudioProcessingEvent|WebKitAnimationEvent']];
+    ['Event', [v11/*class(_UIEventImpl)*/,v11/*class(_UIEventImpl)*/,'Event|WebGLContextEvent|WebKitTransitionEvent|TrackEvent|StorageEvent|SpeechRecognitionEvent|SpeechRecognitionError|SpeechInputEvent|ProgressEvent|XMLHttpRequestProgressEvent|XMLHttpRequestProgressEvent|PopStateEvent|PageTransitionEvent|OverflowEvent|OfflineAudioCompletionEvent|MutationEvent|MessageEvent|MediaStreamTrackEvent|MediaStreamEvent|MediaKeyEvent|IDBVersionChangeEvent|HashChangeEvent|ErrorEvent|DeviceOrientationEvent|DeviceMotionEvent|CustomEvent|CloseEvent|BeforeLoadEvent|AudioProcessingEvent|WebKitAnimationEvent|WebGLContextEvent|WebKitTransitionEvent|TrackEvent|StorageEvent|SpeechRecognitionEvent|SpeechRecognitionError|SpeechInputEvent|ProgressEvent|XMLHttpRequestProgressEvent|XMLHttpRequestProgressEvent|PopStateEvent|PageTransitionEvent|OverflowEvent|OfflineAudioCompletionEvent|MutationEvent|MessageEvent|MediaStreamTrackEvent|MediaStreamEvent|MediaKeyEvent|IDBVersionChangeEvent|HashChangeEvent|ErrorEvent|DeviceOrientationEvent|DeviceMotionEvent|CustomEvent|CloseEvent|BeforeLoadEvent|AudioProcessingEvent|WebKitAnimationEvent'].join('|')]];
 $.dynamicSetMetadata(table);
 })();
 

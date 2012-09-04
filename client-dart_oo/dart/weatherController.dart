@@ -18,7 +18,7 @@ class WeatherController {
       view.form.on.submit.add(newQuery);
       view.login.on.submit.add(login);
       view.logout.on.click.add(logout);
-      view.close.on.click.add(hideError);
+      view.close.on.click.add((event) { hideError(event); });
       
       model = new WeatherModel();
   }

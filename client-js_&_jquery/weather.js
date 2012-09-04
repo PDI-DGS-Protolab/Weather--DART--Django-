@@ -125,3 +125,4 @@
     document.getElementById("form_login").addEventListener('submit',  function (eventObject) { eventObject.preventDefault(); login_fun(); }, false);
     document.getElementById("formulary").addEventListener('submit',  function (eventObject) { search_fun(); eventObject.preventDefault(); }, false);
     document.getElementById("close").addEventListener('click',  function (eventObject) { hide_error();}, false);
+    document.getElementById("logout").addEventListener('click',  function (eventObject) { logout_fun();}, false);
