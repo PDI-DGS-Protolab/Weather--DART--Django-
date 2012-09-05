@@ -13,7 +13,7 @@
                     document.getElementById("logged_user").style.display = 'block';
                     document.getElementById("logged_user").textContent = document.getElementById("user_id").value;
                     document.getElementById("logout_button").style.display = 'block';
-                    document.getElementById("error").style.display = 'none';
+                    hide_error();
                 } 
                 else if (req.status == 401) {
                     document.getElementById('error_text').textContent = "User/password is incorrect";
