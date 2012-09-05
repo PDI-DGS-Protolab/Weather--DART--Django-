@@ -40,7 +40,6 @@ void login(event){
         query('#error').style.display = 'none';
       } 
       else if (req.status == 401) {
-         print("Error: User/password is incorrect");
          query('#error_text').text = "User/password is incorrect";
          query('#error').style.display = '';
       }
@@ -75,12 +74,12 @@ void logout(event) {
   query('#logged_user').style.display = 'none';
   query('#logout_button').style.display = 'none';
   query('#content').style.display = 'none';
-  query('#error').style.display = 'none';
+  hide_error();
 }
 
 /**
  * Function that creates a new query to the server. It does this via a POST
- * request with the city to look for, then, on success calls to the showJson
+ * request with the city to look for, then, on success calls to the onSuccess
  * function with the response recieved. On error:
  * 
  * * If the user is not logged in shows a "User not logged in" message
@@ -88,7 +87,6 @@ void logout(event) {
  */
 void newQuery(event) {
   // Get the city name from the html form
-  var timeOld = Clock.now();
   var city = query("#city").value;
   
   // Create and open a new request
@@ -102,21 +100,17 @@ void newQuery(event) {
         if (req.status == 200) {
           var j = JSON.parse(req.responseText);
           if (j.containsKey("result_json")) {
-            query('#error').style.display = 'none';
-            onSuccess(req, j["result_json"]);
+            hide_error();
+            onSuccess(j["result_json"]);
           }
           // City not found error handling
           else {
-            print('Error: City not found');
             query('#error_text').text = "City not found";
             query('#error').style.display = '';
           }
-          var timeNew = Clock.now();
-          print(timeNew-timeOld);
         }
         // Login error handling
         else if (req.status == 401) {
-          print('Error: User not logged in');
           query('#error_text').text = "User not logged in";
           query('#error').style.display = '';
         }
@@ -131,24 +125,12 @@ void newQuery(event) {
   event.preventDefault();
 }
 
-/** Function to call after a successful POST call. Calls the showJson function 
- * to display the response in the html view
- */
-void onSuccess(XMLHttpRequest req, var parsedJSON) {
-  query('#content').style.display = '';
-  showJson(parsedJSON);
-}
-
-/** Handler that closes the error message. */
-void hideError (event) {
-  query('#error').style.display = 'none';
-}
-
 /** 
- * Function that shows the distinct forecast data in the corresponding elements 
- * of the html
+ * Function to call after a successful POST call. Shows the distinct forecast 
+ * data in the corresponding elements of the html
  */
-void showJson(var parsedJSON) {
+void onSuccess(var parsedJSON) {
+  query('#content').style.display = '';
   query('#city_name').text = parsedJSON["data"]["request"][0]["query"];
   
   // Current condition
@@ -197,4 +179,9 @@ void showJson(var parsedJSON) {
   query('#windSpeedkmh3').text =  '${weatherTomorrow["windspeedKmph"]}Kmph';
   query('#windSpeedMiles3').text =  '${weatherTomorrow["windspeedMiles"]}Mph';
   query('#img3').src = weatherTomorrow["weatherIconUrl"][0]["value"];
+}
+
+/** Handler that closes the error message. */
+void hideError (event) {
+  query('#error').style.display = 'none';
 }

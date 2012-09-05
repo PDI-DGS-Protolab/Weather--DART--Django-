@@ -1,73 +1,73 @@
-    function login_fun() {
+    function login() {
         var user = document.getElementById("user_id").value;
         var pass = document.getElementById("pass_id").value;
 
-        var req_login = new XMLHttpRequest();
-        req_login.open("POST", "http://192.168.1.63:8000/weather/login/", true);
-        req_login.setRequestHeader('Content-Type', 'application/json');
-        req_login.withCredentials = true;
-        req_login.onreadystatechange = function() {
-            if (req_login.readyState == XMLHttpRequest.DONE) {
-                if (req_login.status == 200) {        
+        var req = new XMLHttpRequest();
+        req.open("POST", "http://192.168.1.63:8000/weather/login/", true);
+        req.setRequestHeader('Content-Type', 'application/json');
+        req.withCredentials = true;
+        req.onreadystatechange = function() {
+            if (req.readyState == XMLHttpRequest.DONE) {
+                if (req.status == 200) {        
                     document.getElementById("log_form").style.display = 'none';
                     document.getElementById("logged_user").style.display = 'block';
                     document.getElementById("logged_user").textContent = document.getElementById("user_id").value;
                     document.getElementById("logout_button").style.display = 'block';
                     document.getElementById("error").style.display = 'none';
                 } 
-                else if (req_login.status == 401) {
-                    document.getElementById('error_text').textContent = "The user and/or the password are not correct";
+                else if (req.status == 401) {
+                    document.getElementById('error_text').textContent = "User/password is incorrect";
                     document.getElementById('error').style.display="";
                 }
             }
         }
-        req_login.send(JSON.stringify({username: user, password: pass}));
+        req.send(JSON.stringify({username: user, password: pass}));
     }
 
-    function logout_fun() {
-        var req_logout = new XMLHttpRequest();
-        req_logout.open("POST", "http://192.168.1.63:8000/weather/logout/", true);
-        req_logout.withCredentials = true;
-        req_logout.send();
+    function logout() {
+        var req = new XMLHttpRequest();
+        req.open("POST", "http://192.168.1.63:8000/weather/logout/", true);
+        req.withCredentials = true;
+        req.send();
 
         document.getElementById('log_form').style.display = '';
         document.getElementById('logged_user').style.display = 'none';
         document.getElementById('logout_button').style.display = 'none';
         document.getElementById('content').style.display = 'none';
-        document.getElementById('error').style.display = 'none';
+        hide_error();
     }
 
-    function search_fun() {
+    function newQuery() {
         var city = document.getElementById("city").value;
 
-        var req_search = new XMLHttpRequest();
-        req_search.open("POST", "http://192.168.1.63:8000/weather/querys/", true);
-        req_search.setRequestHeader('Content-Type', 'application/json');
-        req_search.withCredentials = true;
-        req_search.onreadystatechange = function() {
-            if (req_search.readyState == XMLHttpRequest.DONE) {
-                if (req_search.status == 200) {
-                    var j = JSON.parse(req_search.responseText);
+        var req = new XMLHttpRequest();
+        req.open("POST", "http://192.168.1.63:8000/weather/querys/", true);
+        req.withCredentials = true;
+        req.onreadystatechange = function() {
+            if (req.readyState == XMLHttpRequest.DONE) {
+                if (req.status == 200) {
+                    var j = JSON.parse(req.responseText);
                     if (j.hasOwnProperty("result_json")){
-                        document.getElementById('error').style.display = 'none';
-                        document.getElementById('content').style.display = '';
+                        hide_error();
                         onSuccess(j["result_json"]);
                     } 
                     else {
-                    document.getElementById('error_text').textContent = "City " + city + " not found";
+                    document.getElementById('error_text').textContent = "City not found";
                     document.getElementById('error').style.display = '';
                     }
                 } 
-                else if (req_search.status == 401) {
-                    document.getElementById('error_text').textContent = "You are not logged in";
+                else if (req.status == 401) {
+                    document.getElementById('error_text').textContent = "User not logged in";
                     document.getElementById('error').style.display = '';
                 }
             }   
         };
-        req_search.send(JSON.stringify({city: city}));
+        req.setRequestHeader('Content-Type', 'application/json');
+        req.send(JSON.stringify({city: city}));
     }
 
     function onSuccess(j) {
+        document.getElementById('content').style.display = '';
         document.getElementById('city_name').textContent = j["data"]["request"][0]["query"];
 
         // Current condition
@@ -122,7 +122,7 @@
         document.getElementById('error').style.display = 'none';
     }
 
-    document.getElementById("form_login").addEventListener('submit',  function (eventObject) { eventObject.preventDefault(); login_fun(); }, false);
-    document.getElementById("formulary").addEventListener('submit',  function (eventObject) { search_fun(); eventObject.preventDefault(); }, false);
+    document.getElementById("form_login").addEventListener('submit',  function (eventObject) { eventObject.preventDefault(); login(); }, false);
+    document.getElementById("formulary").addEventListener('submit',  function (eventObject) { newQuery(); eventObject.preventDefault(); }, false);
     document.getElementById("close").addEventListener('click',  function (eventObject) { hide_error();}, false);
-    document.getElementById("logout").addEventListener('click',  function (eventObject) { logout_fun();}, false);
+    document.getElementById("logout").addEventListener('click',  function (eventObject) { logout();}, false);

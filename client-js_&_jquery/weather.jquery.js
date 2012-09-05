@@ -1,6 +1,6 @@
-    function login_fun(evt) {
+    function login(event) {
 
-        evt.preventDefault();
+        event.preventDefault();
 
         var json = {
             username : $('#user_id').val(),
@@ -21,16 +21,16 @@
                     $('#logged_user').css({ 'display' : 'block' });
                     $('#logged_user').text( json.username );
                     $('#logout_button').css({ 'display' : 'block' });
-                    $('#error').css({ 'display' : 'none' });
+                    hide_error();
          }).error(function(res) {
-                    $('#error_text').text("The user and/or the password are not correct");
+                    $('#error_text').text("User/password is incorrect");
                     $('#error').css({ 'display' : '' });
 		});
     }
 
 
-    function logout_fun(evt) {
-        evt.preventDefault();
+    function logout(event) {
+        event.preventDefault();
 		var URL = "http://192.168.1.63:8000/weather/logout/";
 		$.ajax({
                 url : URL,
@@ -39,21 +39,21 @@
                     withCredentials: true
                 }
 		}).success(function(res) {
-		console.log(res);
+	    console.log(res);
             $('#log_form').css({ 'display' : '' });
             $('#logged_user').css({ 'display' : 'none' });
             $('#logout_button').css({ 'display' : 'none' });
             $('#content').css({ 'display' : 'none' });
-            $('#error').css({ 'display' : 'none' });
+            hide_error();
         }).error(function(res) {
         console.log(res);	  
         });
     }
 
 
-    function search_fun(evt) {
+    function newQuery(event) {
 	
-        evt.preventDefault();
+        event.preventDefault();
         var city1 = $('#city').val();
         var json = {
             city : city1
@@ -70,17 +70,16 @@
                 }
         }).success(function(j) {
             if (j.hasOwnProperty("result_json")){
-                $('#error').css({ 'display' : 'none' });
-                $('#content').css({ 'display' : '' });
+                hide_error();
                 onSuccess(j["result_json"]);
             }
             else {
-                $('#error_text').text("City " + city1 + " not found");
+                $('#error_text').text("City not found");
                 $('#error').css({ 'display' : '' });
             }
 
         }).error(function(res) {
-            $('#error_text').text("You are not logged in");
+            $('#error_text').text("User not logged in");
             $('#error').css({ 'display' : '' });
         });
 		
@@ -88,14 +87,12 @@
 	
 
     function onSuccess(json) {
-        
+        $('#content').css({ 'display' : '' });
         $('#city_name').text( json["data"]["request"][0]["query"] );
     	  
         // Current condition
         var currentConditions = json["data"]["current_condition"][0];
-
         $('#observationTime').text( currentConditions["observation_time"] );
-
         $('#description1').text( currentConditions["weatherDesc"][0]["value"] );
         $('#tCelsius').text( currentConditions["temp_C"] + 'ºC' );
         $('#tFarenheit').text( currentConditions["temp_F"]+ 'ºF' );
@@ -107,14 +104,12 @@
         $('#windDirectionDegree1').text( currentConditions["winddirDegree"]+ 'º' );
         $('#windDirection16Point1').text( currentConditions["winddir16Point"] );
         $('#windSpeedkmh1').text( currentConditions["windspeedKmph"]+ 'Kmph' );
-        $('#windSpeedMiles1').text( currentConditions["windspeedMiles"]+ 'Mph' );
-        
+        $('#windSpeedMiles1').text( currentConditions["windspeedMiles"]+ 'Mph' );       
         $('#img1').attr("src",currentConditions["weatherIconUrl"][0]["value"]);
      
 		 
         // Today's forecast
-        var weatherToday = json["data"]["weather"][0];
-        
+        var weatherToday = json["data"]["weather"][0];      
         $('#dateToday').text( weatherToday["date"] );
         $('#description2').text( weatherToday["weatherDesc"][0]["value"] );
         $('#minTCelsius1').text( weatherToday["tempMinC"]+ 'ºC' );
@@ -125,14 +120,12 @@
         $('#windDirectionDegree2').text( weatherToday["winddirDegree"]+ 'º' );
         $('#windDirection16Point2').text( weatherToday["winddir16Point"] );
         $('#windSpeedkmh2').text( weatherToday["windspeedKmph"]+ 'Kmph' );
-        $('#windSpeedMiles2').text( weatherToday["windspeedMiles"]+ 'Mph' );
-        
+        $('#windSpeedMiles2').text( weatherToday["windspeedMiles"]+ 'Mph' );        
         $('#img2').attr("src",weatherToday["weatherIconUrl"][0]["value"]);
 		
 
         // Tomorrow's forecast
         var weatherTomorrow = json["data"]["weather"][1];
-
         $('#dateTomorrow').text( weatherTomorrow["date"] );
         $('#description3').text( weatherTomorrow["weatherDesc"][0]["value"] );
         $('#minTCelsius2').text( weatherTomorrow["tempMinC"]+ 'ºC' );
@@ -143,8 +136,7 @@
         $('#windDirectionDegree3').text( weatherTomorrow["winddirDegree"]+ 'º' );
         $('#windDirection16Point3').text( weatherTomorrow["winddir16Point"] );
         $('#windSpeedkmh3').text( weatherTomorrow["windspeedKmph"]+ 'Kmph' );
-        $('#windSpeedMiles3').text( weatherTomorrow["windspeedMiles"]+ 'Mph' );
-        
+        $('#windSpeedMiles3').text( weatherTomorrow["windspeedMiles"]+ 'Mph' );       
        	$('#img3').attr("src",weatherTomorrow["weatherIconUrl"][0]["value"]);
     }
 
@@ -155,7 +147,7 @@
 	
 	
     // Event Handlers Assignment
-    $('#form_login').on('submit', login_fun);
-    $('#formulary').on('submit', search_fun);
+    $('#form_login').on('submit', login);
+    $('#formulary').on('submit', newQuery);
     $('#close').on('click', hide_error);
-    $('#logout').on('click', logout_fun);
+    $('#logout').on('click', logout);
