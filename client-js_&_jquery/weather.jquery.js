@@ -31,7 +31,7 @@
 
     function logout_fun(evt) {
         evt.preventDefault();
-		var URL = "http://192.168.1.63:8000/weather/logout";
+		var URL = "http://192.168.1.63:8000/weather/logout/";
 		$.ajax({
                 url : URL,
                 type: "POST",
