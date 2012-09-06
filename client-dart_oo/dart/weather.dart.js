@@ -1058,22 +1058,14 @@ $$.JSSyntaxRegExp = {"":
 };
 
 $$.MatchImplementation = {"":
- ["_groups", "_end", "_lib0_start", "str", "pattern?"],
+ ["_groups", "_end", "_start", "str", "pattern?"],
  super: "Object",
  operator$index$1: function(index) {
   return this.group$1(index);
 },
  group$1: function(index) {
   return $.index(this._groups, index);
-},
- end$0: function() {
-  return this._end;
-},
- get$end: function() { return new $.BoundClosure(this, 'end$0'); },
- start$0: function() {
-  return this._lib0_start;
-},
- get$start: function() { return new $.BoundClosure(this, 'start$0'); }
+}
 };
 
 $$._AllMatchesIterable = {"":
@@ -1161,7 +1153,7 @@ $$.MetaInfo = {"":
 };
 
 $$.StringMatch = {"":
- ["pattern?", "str", "_start"],
+ ["pattern?", "str", "_lib1_start"],
  super: "Object",
  group$1: function(group_) {
   if (!$.eqB(group_, 0))
@@ -1170,15 +1162,7 @@ $$.StringMatch = {"":
 },
  operator$index$1: function(g) {
   return this.group$1(g);
-},
- end$0: function() {
-  return $.add(this._start, $.get$length(this.pattern));
-},
- get$end: function() { return new $.BoundClosure(this, 'end$0'); },
- start$0: function() {
-  return this._start;
-},
- get$start: function() { return new $.BoundClosure(this, 'start$0'); }
+}
 };
 
 $$.Object = {"":
@@ -1391,12 +1375,12 @@ $$.WeatherController = {"":
   var req = this.model.newQuery$1(this.view.getCity$0());
   $.add$1(req.get$on().get$readyStateChange(), new $.WeatherController_newQuery_anon(this, req));
 },
- get$newQuery: function() { return new $.BoundClosure0(this, 'newQuery$1'); },
+ get$newQuery: function() { return new $.BoundClosure(this, 'newQuery$1'); },
  logout$1: function(event$) {
   var req = this.model.logout$0();
   $.add$1(req.get$on().get$readyStateChange(), new $.WeatherController_logout_anon(this, req));
 },
- get$logout: function() { return new $.BoundClosure0(this, 'logout$1'); },
+ get$logout: function() { return new $.BoundClosure(this, 'logout$1'); },
  login$1: function(event$) {
   event$.preventDefault$0();
   var t1 = this.model;
@@ -1404,7 +1388,7 @@ $$.WeatherController = {"":
   var req = t1 .login$2(t2 .get$user().get$value(), t2 .get$pass().get$value());
   $.add$1(req.get$on().get$readyStateChange(), new $.WeatherController_login_anon(this, req));
 },
- get$login: function() { return new $.BoundClosure0(this, 'login$1'); },
+ get$login: function() { return new $.BoundClosure(this, 'login$1'); },
  hideError$1: function(event$) {
   this.view.hideError$0();
 },
@@ -1573,7 +1557,7 @@ $$.WeatherModel = {"":
   req.send$0();
   return req;
 },
- get$logout: function() { return new $.BoundClosure(this, 'logout$0'); },
+ get$logout: function() { return new $.BoundClosure0(this, 'logout$0'); },
  login$2: function(user, pass) {
   var req = $._XMLHttpRequestFactoryProvider_XMLHttpRequest();
   req.open$3('POST', 'http://192.168.1.63:8000/weather/login/', true);
@@ -1585,44 +1569,24 @@ $$.WeatherModel = {"":
 };
 
 $$.WeatherTest = {"":
- ["v=", "q=", "l=", "average=", "elapsed=", "end=", "start?", "view?", "model"],
+ ["jsonString2", "jsonString1", "json2", "json1", "view?", "model"],
  super: "Object",
- testQueryView$3: function(n, city1, city2) {
-  $.print('Executing ' + $.S(n) + ' calls to newQuery with view update...');
-  this.v = 0;
-  this.start = $.DateImplementation$now();
-  for (var t1 = this.model, i = 0; i < n; ++i) {
-    var t2 = (({}));
-    t2 .req_1 = null;
-    if ($.mod(i, 2) === 0)
-      t2 .req_1 = t1 .newQuery$1(city1);
-    else
-      t2 .req_1 = t1 .newQuery$1(city2);
-    $.add$1(t2 .req_1 .get$on().get$readyStateChange(), new $.WeatherTest_testQueryView_anon(this, t2, n));
-  }
-},
- testQuery$2: function(n, city) {
-  $.print('Executing ' + $.S(n) + ' calls to newQuery...');
-  this.q = 0;
-  this.start = $.DateImplementation$now();
-  for (var t1 = this.model, i = 0; i < n; ++i) {
-    var req = t1 .newQuery$1(city);
-    $.add$1(req.get$on().get$readyStateChange(), new $.WeatherTest_testQuery_anon(this, req, n));
-  }
-},
- testLogin$1: function(n) {
-  $.print('Executing ' + $.S(n) + ' calls to login...');
-  this.l = 0;
-  this.start = $.DateImplementation$now();
-  for (var t1 = this.model, i = 0; i < n; ++i) {
-    var req = t1 .login$2('admin', 'admin');
-    $.add$1(req.get$on().get$readyStateChange(), new $.WeatherTest_testLogin_anon(this, req, n));
-  }
+ testJson$1: function(n) {
+  var start = $.DateImplementation$now();
+  $.print('Executing ' + $.S(n) + ' view switches...');
+  for (var t1 = this.jsonString1, i = 0; i < n; ++i)
+    $.JSON_parse(t1);
+  var average = $.div($.sub($.DateImplementation$now().millisecondsSinceEpoch, start.millisecondsSinceEpoch), n);
+  $.print('Average time for ' + $.S(n) + ' json parses = ' + $.S(average) + ' ms');
 },
  WeatherTest$0: function() {
   this.model = $.WeatherModel$();
   this.view = $.WeatherView$();
-  this.testLogin$1(1000);
+  this.jsonString1 = '{"data": {"current_condition": [{"windspeedMiles": "4", "winddirDegree": "50", "observation_time": "08:08 AM", "temp_F": "64", "temp_C": "18", "humidity": "68", "winddir16Point": "NE", "pressure": "1019", "precipMM": "0.0", "visibility": "10", "cloudcover": "0", "weatherCode": "113", "weatherDesc": [{"value": "Sunny"}], "windspeedKmph": "7", "weatherIconUrl": [{"value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"}]}], "weather": [{"windspeedMiles": "9", "tempMaxC": "31", "tempMaxF": "87", "tempMinC": "17", "tempMinF": "63", "winddir16Point": "E", "weatherCode": "113", "precipMM": "0.0", "weatherDesc": [{"value": "Sunny"}], "winddirDegree": "90", "winddirection": "E", "date": "2012-09-05", "windspeedKmph": "15", "weatherIconUrl": [{"value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"}]}, {"windspeedMiles": "9", "tempMaxC": "31", "tempMaxF": "87", "tempMinC": "17", "tempMinF": "63", "winddir16Point": "SE", "weatherCode": "113", "precipMM": "0.0", "weatherDesc": [{"value": "Sunny"}], "winddirDegree": "129", "winddirection": "SE", "date": "2012-09-06", "windspeedKmph": "14", "weatherIconUrl": [{"value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"}]}], "request": [{"query": "Madrid, Spain", "type": "City"}]}}';
+  this.jsonString2 = '{"data": {"current_condition": [{"windspeedMiles": "7", "winddirDegree": "110", "observation_time": "08:18 AM", "temp_F": "77", "temp_C": "25", "humidity": "41", "winddir16Point": "ESE", "pressure": "1017", "precipMM": "0.0", "visibility": "10", "cloudcover": "0", "weatherCode": "113", "weatherDesc": [{"value": "Sunny"}], "windspeedKmph": "11", "weatherIconUrl": [{"value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"}]}], "weather": [{"windspeedMiles": "6", "tempMaxC": "28", "tempMaxF": "83", "tempMinC": "15", "tempMinF": "59", "winddir16Point": "ESE", "weatherCode": "113", "precipMM": "0.0", "weatherDesc": [{"value": "Sunny"}], "winddirDegree": "102", "winddirection": "ESE", "date": "2012-09-05", "windspeedKmph": "10", "weatherIconUrl": [{"value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"}]}, {"windspeedMiles": "5", "tempMaxC": "29", "tempMaxF": "84", "tempMinC": "16", "tempMinF": "61", "winddir16Point": "SE", "weatherCode": "113", "precipMM": "0.0", "weatherDesc": [{"value": "Sunny"}], "winddirDegree": "132", "winddirection": "SE", "date": "2012-09-06", "windspeedKmph": "8", "weatherIconUrl": [{"value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"}]}], "request": [{"query": "Bucharest, Romania", "type": "City"}]}}';
+  this.json1 = $.JSON_parse(this.jsonString1);
+  this.json2 = $.JSON_parse(this.jsonString2);
+  this.testJson$1(10000);
 }
 };
 
@@ -1861,13 +1825,7 @@ $$._SharedWorkerContextEventsImpl = {"":
 
 $$._SpeechRecognitionEventsImpl = {"":
  ["_ptr"],
- super: "_EventsImpl",
- get$start: function() {
-  return this.operator$index$1('start');
-},
- get$end: function() {
-  return this.operator$index$1('end');
-}
+ super: "_EventsImpl"
 };
 
 $$._TextTrackEventsImpl = {"":
@@ -1945,7 +1903,7 @@ $$._DOMWindowCrossFrameImpl = {"":
  close$0: function() {
   return $._DOMWindowCrossFrameImpl__close(this._window);
 },
- get$close: function() { return new $.BoundClosure(this, 'close$0'); }
+ get$close: function() { return new $.BoundClosure0(this, 'close$0'); }
 };
 
 $$._IDBOpenDBRequestEventsImpl = {"":
@@ -2676,7 +2634,7 @@ $$._ReceivePortImpl = {"":
   this._callback = null;
   $._globalState().get$currentContext().unregister$1(this._id);
 },
- get$close: function() { return new $.BoundClosure(this, 'close$0'); },
+ get$close: function() { return new $.BoundClosure0(this, 'close$0'); },
  receive$1: function(onMessage) {
   this._callback = onMessage;
 },
@@ -3380,27 +3338,6 @@ $$.WeatherController_newQuery_anon = {"":
 }
 };
 
-$$.WeatherTest_testLogin_anon = {"":
- ["this_2", "req_1", "n_0"],
- super: "Closure",
- call$1: function(e) {
-  if ($.eqB(this.req_1 .get$readyState(), 4)) {
-    var t1 = this.this_2;
-    t1 .set$l($.add(t1 .get$l(), 1));
-    if ($.eqB(this.this_2 .get$l(), this.n_0)) {
-      t1 = $.DateImplementation$now();
-      this.this_2 .set$end(t1);
-      t1 = $.sub(this.this_2 .get$end().get$millisecondsSinceEpoch(), this.this_2 .get$start().get$millisecondsSinceEpoch());
-      this.this_2 .set$elapsed(t1);
-      t1 = $.div(this.this_2 .get$elapsed(), this.n_0);
-      this.this_2 .set$average(t1);
-      $.print('Average time for ' + $.S(this.n_0) + ' logins = ' + $.S(this.this_2 .get$average()) + ' ms');
-      this.this_2 .testQuery$2(1000, 'Budapest');
-    }
-  }
-}
-};
-
 $$.DateImplementation_toString_fourDigits = {"":
  [],
  super: "Closure",
@@ -3436,51 +3373,6 @@ $$.DateImplementation_toString_twoDigits = {"":
   if ($.geB(n, 10))
     return $.S(n);
   return '0' + $.S(n);
-}
-};
-
-$$.WeatherTest_testQuery_anon = {"":
- ["this_2", "req_1", "n_0"],
- super: "Closure",
- call$1: function(e) {
-  if ($.eqB(this.req_1 .get$readyState(), 4)) {
-    var t1 = this.this_2;
-    t1 .set$q($.add(t1 .get$q(), 1));
-    if ($.eqB(this.this_2 .get$q(), this.n_0)) {
-      t1 = $.DateImplementation$now();
-      this.this_2 .set$end(t1);
-      t1 = $.sub(this.this_2 .get$end().get$millisecondsSinceEpoch(), this.this_2 .get$start().get$millisecondsSinceEpoch());
-      this.this_2 .set$elapsed(t1);
-      t1 = $.div(this.this_2 .get$elapsed(), this.n_0);
-      this.this_2 .set$average(t1);
-      $.print('Average time for ' + $.S(this.n_0) + ' querys = ' + $.S(this.this_2 .get$average()) + ' ms');
-      this.this_2 .testQueryView$3(1000, 'Yokohama', 'Madrid');
-    }
-  }
-}
-};
-
-$$.WeatherTest_testQueryView_anon = {"":
- ["this_3", "box_0", "n_2"],
- super: "Closure",
- call$1: function(e) {
-  if ($.eqB(this.box_0 .req_1 .get$readyState(), 4)) {
-    var t1 = this.this_3;
-    t1 .set$v($.add(t1 .get$v(), 1));
-    if ($.eqB(this.box_0 .req_1 .get$status(), 200)) {
-      var j = $.JSON_parse(this.box_0 .req_1 .get$responseText());
-      this.this_3 .get$view().showJson$1($.index(j, 'result_json'));
-    }
-    if ($.eqB(this.this_3 .get$v(), this.n_2)) {
-      t1 = $.DateImplementation$now();
-      this.this_3 .set$end(t1);
-      t1 = $.sub(this.this_3 .get$end().get$millisecondsSinceEpoch(), this.this_3 .get$start().get$millisecondsSinceEpoch());
-      this.this_3 .set$elapsed(t1);
-      t1 = $.div(this.this_3 .get$elapsed(), this.n_2);
-      this.this_3 .set$average(t1);
-      $.print('Average time for ' + $.S(this.n_2) + ' querys with view update = ' + $.S(this.this_3 .get$average()) + ' ms');
-    }
-  }
 }
 };
 
@@ -3714,12 +3606,12 @@ $$.anon1 = {"":
 $$.BoundClosure = {'':
  ['self', 'target'],
  'super': 'Closure',
-call$0: function() { return this.self[this.target](); }
+call$1: function(p0) { return this.self[this.target](p0); }
 };
 $$.BoundClosure0 = {'':
  ['self', 'target'],
  'super': 'Closure',
-call$1: function(p0) { return this.self[this.target](p0); }
+call$0: function() { return this.self[this.target](); }
 };
 $$.BoundClosure1 = {'':
  ['self', 'target'],
@@ -4487,22 +4379,6 @@ $.dynamicSetMetadata = function(inputTable) {
   $._dynamicMetadata(t1);
 };
 
-$.mod = function(a, b) {
-  if ($.checkNumbers(a, b) === true) {
-    var result = ((a % b));
-    if (result === 0)
-      return 0;
-    if (result > 0)
-      return result;
-    b = ((b));
-    if (b < 0)
-      return result - b;
-    else
-      return result + b;
-  }
-  return a.operator$mod$1(b);
-};
-
 $._IDBRequestEventsImpl$ = function(_ptr) {
   return new $._IDBRequestEventsImpl(_ptr);
 };
@@ -4742,16 +4618,16 @@ $.Primitives_lazyAsJsDate = function(receiver) {
   return (receiver.date);
 };
 
+$._MainManagerStub$ = function() {
+  return new $._MainManagerStub();
+};
+
 $.JSSyntaxRegExp$_globalVersionOf = function(other) {
   var t1 = other.get$pattern();
   var t2 = other.get$multiLine();
   t1 = new $.JSSyntaxRegExp(other.get$ignoreCase(), t2, t1);
   t1 .JSSyntaxRegExp$_globalVersionOf$1(other);
   return t1;
-};
-
-$._MainManagerStub$ = function() {
-  return new $._MainManagerStub();
 };
 
 $._FileReaderEventsImpl$ = function(_ptr) {
@@ -5265,16 +5141,6 @@ $._SpeechRecognitionEventsImpl$ = function(_ptr) {
   return new $._SpeechRecognitionEventsImpl(_ptr);
 };
 
-$.Primitives_getSeconds = function(receiver) {
-  return receiver.get$isUtc() === true ? (($.Primitives_lazyAsJsDate(receiver).getUTCSeconds())) : (($.Primitives_lazyAsJsDate(receiver).getSeconds()));
-};
-
-$.add$slow = function(a, b) {
-  if ($.checkNumbers(a, b) === true)
-    return (a + b);
-  return a.operator$add$1(b);
-};
-
 $.Arrays_indexOf = function(a, element, startIndex, endIndex) {
   if (typeof a !== 'string' && (typeof a !== 'object' || a === null || a.constructor !== Array && !a.is$JavaScriptIndexingBehavior()))
     return $.Arrays_indexOf$bailout(1, a, element, startIndex, endIndex);
@@ -5296,6 +5162,16 @@ $.Arrays_indexOf = function(a, element, startIndex, endIndex) {
       return i;
   }
   return -1;
+};
+
+$.Primitives_getSeconds = function(receiver) {
+  return receiver.get$isUtc() === true ? (($.Primitives_lazyAsJsDate(receiver).getUTCSeconds())) : (($.Primitives_lazyAsJsDate(receiver).getSeconds()));
+};
+
+$.add$slow = function(a, b) {
+  if ($.checkNumbers(a, b) === true)
+    return (a + b);
+  return a.operator$add$1(b);
 };
 
 $.IllegalArgumentException$ = function(arg) {
@@ -5440,7 +5316,7 @@ $._BatteryManagerEventsImpl$ = function(_ptr) {
 };
 
 $.WeatherTest$ = function() {
-  var t1 = new $.WeatherTest(null, null, null, null, null, null, null, null, null);
+  var t1 = new $.WeatherTest(null, null, null, null, null, null);
   t1 .WeatherTest$0();
   return t1;
 };
@@ -6197,7 +6073,7 @@ $.$defineNativeClass('DocumentFragment', [], {
 },
  click$0: function() {
 },
- get$click: function() { return new $.BoundClosure(this, 'click$0'); },
+ get$click: function() { return new $.BoundClosure0(this, 'click$0'); },
  get$style: function() {
   return $._ElementFactoryProvider_Element$tag('div').get$style();
 },
@@ -6219,7 +6095,7 @@ $.$defineNativeClass('Element', ["style?", "id?"], {
  click$0: function() {
   return (this.click());
 },
- get$click: function() { return new $.BoundClosure(this, 'click$0'); },
+ get$click: function() { return new $.BoundClosure0(this, 'click$0'); },
  get$on: function() {
   if (Object.getPrototypeOf(this).hasOwnProperty('get$on')) {
   {
@@ -6279,7 +6155,7 @@ $.$defineNativeClass('EventSource', ["readyState?"], {
  close$0: function() {
   return (this.close());
 },
- get$close: function() { return new $.BoundClosure(this, 'close$0'); },
+ get$close: function() { return new $.BoundClosure0(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -6466,7 +6342,7 @@ $.$defineNativeClass('HTMLFormElement', ["length?"], {
  submit$0: function() {
   return (this.submit());
 },
- get$submit: function() { return new $.BoundClosure(this, 'submit$0'); },
+ get$submit: function() { return new $.BoundClosure0(this, 'submit$0'); },
  reset$0: function() {
   return (this.reset());
 }
@@ -6555,7 +6431,7 @@ $.$defineNativeClass('IDBDatabase', [], {
  close$0: function() {
   return (this.close());
 },
- get$close: function() { return new $.BoundClosure(this, 'close$0'); },
+ get$close: function() { return new $.BoundClosure0(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -6796,13 +6672,6 @@ $.$defineNativeClass('Location', [], {
 }
 });
 
-$.$defineNativeClass('HTMLMarqueeElement', [], {
- start$0: function() {
-  return (this.start());
-},
- get$start: function() { return new $.BoundClosure(this, 'start$0'); }
-});
-
 $.$defineNativeClass('MediaController', [], {
  $dom_removeEventListener$3: function(type, listener, useCapture) {
   return (this.removeEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
@@ -6916,10 +6785,6 @@ $.$defineNativeClass('MessageEvent', ["ports?"], {
 });
 
 $.$defineNativeClass('MessagePort', [], {
- start$0: function() {
-  return (this.start());
-},
- get$start: function() { return new $.BoundClosure(this, 'start$0'); },
  $dom_removeEventListener$3: function(type, listener, useCapture) {
   return (this.removeEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -6932,7 +6797,7 @@ $.$defineNativeClass('MessagePort', [], {
  close$0: function() {
   return (this.close());
 },
- get$close: function() { return new $.BoundClosure(this, 'close$0'); },
+ get$close: function() { return new $.BoundClosure0(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -7069,16 +6934,13 @@ $.$defineNativeClass('Notification', ["tag?"], {
  close$0: function() {
   return (this.close());
 },
- get$close: function() { return new $.BoundClosure(this, 'close$0'); },
+ get$close: function() { return new $.BoundClosure0(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
  get$on: function() {
   return $._NotificationEventsImpl$(this);
 }
-});
-
-$.$defineNativeClass('HTMLOListElement', ["start?"], {
 });
 
 $.$defineNativeClass('HTMLObjectElement', ["form?"], {
@@ -7100,7 +6962,7 @@ $.$defineNativeClass('PeerConnection00', ["readyState?"], {
  close$0: function() {
   return (this.close());
 },
- get$close: function() { return new $.BoundClosure(this, 'close$0'); },
+ get$close: function() { return new $.BoundClosure0(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -7232,10 +7094,6 @@ $.$defineNativeClass('SpeechInputResultList', ["length?"], {
 });
 
 $.$defineNativeClass('SpeechRecognition', [], {
- start$0: function() {
-  return (this.start());
-},
- get$start: function() { return new $.BoundClosure(this, 'start$0'); },
  $dom_removeEventListener$3: function(type, listener, useCapture) {
   return (this.removeEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -7397,14 +7255,6 @@ $.$defineNativeClass('TextTrackList', ["length?"], {
 });
 
 $.$defineNativeClass('TimeRanges', ["length?"], {
- start$1: function(index) {
-  return (this.start(index));
-},
- get$start: function() { return new $.BoundClosure0(this, 'start$1'); },
- end$1: function(index) {
-  return (this.end(index));
-},
- get$end: function() { return new $.BoundClosure0(this, 'end$1'); }
 });
 
 $.$defineNativeClass('TouchList', ["length?"], {
@@ -7593,7 +7443,7 @@ $.$defineNativeClass('DOMWindow', ["status?", "length?"], {
  close$0: function() {
   return (this.close());
 },
- get$close: function() { return new $.BoundClosure(this, 'close$0'); },
+ get$close: function() { return new $.BoundClosure0(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -7633,7 +7483,7 @@ $.$defineNativeClass('WorkerContext', [], {
  close$0: function() {
   return (this.close());
 },
- get$close: function() { return new $.BoundClosure(this, 'close$0'); },
+ get$close: function() { return new $.BoundClosure0(this, 'close$0'); },
  $dom_addEventListener$3: function(type, listener, useCapture) {
   return (this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture));
 },
@@ -7736,7 +7586,7 @@ $.$defineNativeClass('DOMWindow', [], {
 }
 });
 
-// 162 dynamic classes.
+// 160 dynamic classes.
 // 337 classes
 // 31 !leaf
 (function(){

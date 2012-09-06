@@ -37,7 +37,7 @@ void login(event){
         query('#logged_user').text = user;
         
         query('#logout_button').style.display = '';
-        hide_error(null);
+        hideError(null);
       } 
       else if (req.status == 401) {
          query('#error_text').text = "User/password is incorrect";
@@ -74,7 +74,7 @@ void logout(event) {
   query('#logged_user').style.display = 'none';
   query('#logout_button').style.display = 'none';
   query('#content').style.display = 'none';
-  hide_error(null);
+  hideError(null);
 }
 
 /**
@@ -100,7 +100,7 @@ void newQuery(event) {
         if (req.status == 200) {
           var j = JSON.parse(req.responseText);
           if (j.containsKey("result_json")) {
-            hide_error(null);
+            hideError(null);
             onSuccess(j["result_json"]);
           }
           // City not found error handling

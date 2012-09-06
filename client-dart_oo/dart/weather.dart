@@ -15,10 +15,10 @@ void main() {
   var c = new WeatherController();
   
   // Used for testing purposes
-//  document.on.keyPress.add((KeyboardEvent e) {
-//    if (e.keyCode == 13) {
-//      var t = new WeatherTest();
-//    }
-//  });
+  document.on.keyPress.add((KeyboardEvent e) {
+    if (e.keyCode == 13) {
+      var t = new WeatherTest();
+    }
+  });
   
 }
