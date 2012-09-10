@@ -13,9 +13,9 @@ class WeatherTest {
     json1 = JSON.parse(jsonString1);
     json2 = JSON.parse(jsonString2);
     //Begin tests
-    //testXHR(1000);
-    //testView(10000);
+    testView(10000);
     testJson(10000);
+    testXHR(1000);
   }
   
   /**
@@ -70,7 +70,8 @@ class WeatherTest {
             var elapsed = end.millisecondsSinceEpoch - start.millisecondsSinceEpoch;
             var average = elapsed / n;
             print('Average time for $n querys = $average ms');
-            testQueryView(n, 'Yokohama', 'Madrid');          }
+            testQueryView(n, 'Yokohama', 'Madrid');          
+          }
         }
       });
     }

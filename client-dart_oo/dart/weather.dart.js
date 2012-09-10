@@ -1573,11 +1573,88 @@ $$.WeatherTest = {"":
  super: "Object",
  testJson$1: function(n) {
   var start = $.DateImplementation$now();
-  $.print('Executing ' + $.S(n) + ' view switches...');
+  $.print('Executing ' + $.S(n) + ' json parses...');
   for (var t1 = this.jsonString1, i = 0; i < n; ++i)
     $.JSON_parse(t1);
   var average = $.div($.sub($.DateImplementation$now().millisecondsSinceEpoch, start.millisecondsSinceEpoch), n);
   $.print('Average time for ' + $.S(n) + ' json parses = ' + $.S(average) + ' ms');
+},
+ testView$1: function(n) {
+  var start = $.DateImplementation$now();
+  $.print('Executing ' + $.S(n) + ' view switches...');
+  for (var t1 = this.view, t2 = this.json1, t3 = this.json2, i = 0; i < n; ++i) {
+    t1 .showJson$1(t2);
+    t1 .showJson$1(t3);
+  }
+  var average = $.div($.sub($.DateImplementation$now().millisecondsSinceEpoch, start.millisecondsSinceEpoch), n);
+  $.print('Average time for ' + $.S(n) + ' view switches = ' + $.S(average) + ' ms');
+},
+ testQueryView$3: function(n, city1, city2) {
+  var t1 = (({}));
+  if (typeof n !== 'number')
+    return this.testQueryView$3$bailout(1, n, city1, city2, t1);
+  $.print('Executing ' + $.S(n) + ' calls to newQuery with view update...');
+  t1 .v_3 = 0;
+  var start = $.DateImplementation$now();
+  for (var t2 = this.model, i = 0; i < n; ++i) {
+    var t3 = (({}));
+    t3 .req_1 = null;
+    if ($.mod(i, 2) === 0)
+      t3 .req_1 = t2 .newQuery$1(city1);
+    else
+      t3 .req_1 = t2 .newQuery$1(city2);
+    $.add$1(t3 .req_1 .get$on().get$readyStateChange(), new $.WeatherTest_testQueryView_anon(this, t3, start, n, t1));
+  }
+},
+ testQueryView$3$bailout: function(state, n, city1, city2, t1) {
+  ;
+  $.print('Executing ' + $.S(n) + ' calls to newQuery with view update...');
+  t1 .v_3 = 0;
+  var start = $.DateImplementation$now();
+  for (var t2 = this.model, i = 0; $.ltB(i, n); ++i) {
+    var t3 = (({}));
+    t3 .req_1 = null;
+    if ($.mod(i, 2) === 0)
+      t3 .req_1 = t2 .newQuery$1(city1);
+    else
+      t3 .req_1 = t2 .newQuery$1(city2);
+    $.add$1(t3 .req_1 .get$on().get$readyStateChange(), new $.WeatherTest_testQueryView_anon(this, t3, start, n, t1));
+  }
+},
+ testQuery$2: function(n, city) {
+  var t1 = (({}));
+  if (typeof n !== 'number')
+    return this.testQuery$2$bailout(1, n, city, t1);
+  $.print('Executing ' + $.S(n) + ' calls to newQuery...');
+  t1 .q_1 = 0;
+  var start = $.DateImplementation$now();
+  for (var t2 = this.model, i = 0; i < n; ++i) {
+    var req = t2 .newQuery$1(city);
+    $.add$1(req.get$on().get$readyStateChange(), new $.WeatherTest_testQuery_anon(start, t1, req, n, this));
+  }
+},
+ testQuery$2$bailout: function(state, n, city, t1) {
+  ;
+  $.print('Executing ' + $.S(n) + ' calls to newQuery...');
+  t1 .q_1 = 0;
+  var start = $.DateImplementation$now();
+  for (var t2 = this.model, i = 0; $.ltB(i, n); ++i) {
+    var req = t2 .newQuery$1(city);
+    $.add$1(req.get$on().get$readyStateChange(), new $.WeatherTest_testQuery_anon(start, t1, req, n, this));
+  }
+},
+ testLogin$1: function(n) {
+  var t1 = (({}));
+  $.print('Executing ' + $.S(n) + ' calls to login...');
+  t1 .l_1 = 0;
+  var start = $.DateImplementation$now();
+  for (var t2 = this.model, i = 0; i < n; ++i) {
+    var req = t2 .login$2('admin', 'admin');
+    $.add$1(req.get$on().get$readyStateChange(), new $.WeatherTest_testLogin_anon(start, t1, req, n, this));
+  }
+},
+ testXHR$1: function(n) {
+  this.testLogin$1(n);
 },
  WeatherTest$0: function() {
   this.model = $.WeatherModel$();
@@ -1586,7 +1663,9 @@ $$.WeatherTest = {"":
   this.jsonString2 = '{"data": {"current_condition": [{"windspeedMiles": "7", "winddirDegree": "110", "observation_time": "08:18 AM", "temp_F": "77", "temp_C": "25", "humidity": "41", "winddir16Point": "ESE", "pressure": "1017", "precipMM": "0.0", "visibility": "10", "cloudcover": "0", "weatherCode": "113", "weatherDesc": [{"value": "Sunny"}], "windspeedKmph": "11", "weatherIconUrl": [{"value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"}]}], "weather": [{"windspeedMiles": "6", "tempMaxC": "28", "tempMaxF": "83", "tempMinC": "15", "tempMinF": "59", "winddir16Point": "ESE", "weatherCode": "113", "precipMM": "0.0", "weatherDesc": [{"value": "Sunny"}], "winddirDegree": "102", "winddirection": "ESE", "date": "2012-09-05", "windspeedKmph": "10", "weatherIconUrl": [{"value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"}]}, {"windspeedMiles": "5", "tempMaxC": "29", "tempMaxF": "84", "tempMinC": "16", "tempMinF": "61", "winddir16Point": "SE", "weatherCode": "113", "precipMM": "0.0", "weatherDesc": [{"value": "Sunny"}], "winddirDegree": "132", "winddirection": "SE", "date": "2012-09-06", "windspeedKmph": "8", "weatherIconUrl": [{"value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"}]}], "request": [{"query": "Bucharest, Romania", "type": "City"}]}}';
   this.json1 = $.JSON_parse(this.jsonString1);
   this.json2 = $.JSON_parse(this.jsonString2);
+  this.testView$1(10000);
   this.testJson$1(10000);
+  this.testXHR$1(1000);
 }
 };
 
@@ -3338,6 +3417,22 @@ $$.WeatherController_newQuery_anon = {"":
 }
 };
 
+$$.WeatherTest_testLogin_anon = {"":
+ ["start_5", "box_0", "req_4", "n_3", "this_2"],
+ super: "Closure",
+ call$1: function(e) {
+  if ($.eqB(this.req_4 .get$readyState(), 4)) {
+    var l = $.add(this.box_0 .l_1, 1);
+    this.box_0 .l_1 = l;
+    if ($.eqB(this.box_0 .l_1, this.n_3)) {
+      var average = $.div($.sub($.DateImplementation$now().millisecondsSinceEpoch, this.start_5 .get$millisecondsSinceEpoch()), this.n_3);
+      $.print('Average time for ' + $.S(this.n_3) + ' logins = ' + $.S(average) + ' ms');
+      this.this_2 .testQuery$2(this.n_3, 'Budapest');
+    }
+  }
+}
+};
+
 $$.DateImplementation_toString_fourDigits = {"":
  [],
  super: "Closure",
@@ -3373,6 +3468,41 @@ $$.DateImplementation_toString_twoDigits = {"":
   if ($.geB(n, 10))
     return $.S(n);
   return '0' + $.S(n);
+}
+};
+
+$$.WeatherTest_testQuery_anon = {"":
+ ["start_5", "box_0", "req_4", "n_3", "this_2"],
+ super: "Closure",
+ call$1: function(e) {
+  if ($.eqB(this.req_4 .get$readyState(), 4)) {
+    var q = $.add(this.box_0 .q_1, 1);
+    this.box_0 .q_1 = q;
+    if ($.eqB(this.box_0 .q_1, this.n_3)) {
+      var average = $.div($.sub($.DateImplementation$now().millisecondsSinceEpoch, this.start_5 .get$millisecondsSinceEpoch()), this.n_3);
+      $.print('Average time for ' + $.S(this.n_3) + ' querys = ' + $.S(average) + ' ms');
+      this.this_2 .testQueryView$3(this.n_3, 'Yokohama', 'Madrid');
+    }
+  }
+}
+};
+
+$$.WeatherTest_testQueryView_anon = {"":
+ ["this_6", "box_0", "start_5", "n_4", "box_2"],
+ super: "Closure",
+ call$1: function(e) {
+  if ($.eqB(this.box_0 .req_1 .get$readyState(), 4)) {
+    var v = $.add(this.box_2 .v_3, 1);
+    this.box_2 .v_3 = v;
+    if ($.eqB(this.box_0 .req_1 .get$status(), 200)) {
+      var j = $.JSON_parse(this.box_0 .req_1 .get$responseText());
+      this.this_6 .get$view().showJson$1($.index(j, 'result_json'));
+    }
+    if ($.eqB(this.box_2 .v_3, this.n_4)) {
+      var average = $.div($.sub($.DateImplementation$now().millisecondsSinceEpoch, this.start_5 .get$millisecondsSinceEpoch()), this.n_4);
+      $.print('Average time for ' + $.S(this.n_4) + ' querys with view update = ' + $.S(average) + ' ms');
+    }
+  }
 }
 };
 
@@ -4379,6 +4509,22 @@ $.dynamicSetMetadata = function(inputTable) {
   $._dynamicMetadata(t1);
 };
 
+$.mod = function(a, b) {
+  if ($.checkNumbers(a, b) === true) {
+    var result = ((a % b));
+    if (result === 0)
+      return 0;
+    if (result > 0)
+      return result;
+    b = ((b));
+    if (b < 0)
+      return result - b;
+    else
+      return result + b;
+  }
+  return a.operator$mod$1(b);
+};
+
 $._IDBRequestEventsImpl$ = function(_ptr) {
   return new $._IDBRequestEventsImpl(_ptr);
 };
@@ -4618,16 +4764,16 @@ $.Primitives_lazyAsJsDate = function(receiver) {
   return (receiver.date);
 };
 
-$._MainManagerStub$ = function() {
-  return new $._MainManagerStub();
-};
-
 $.JSSyntaxRegExp$_globalVersionOf = function(other) {
   var t1 = other.get$pattern();
   var t2 = other.get$multiLine();
   t1 = new $.JSSyntaxRegExp(other.get$ignoreCase(), t2, t1);
   t1 .JSSyntaxRegExp$_globalVersionOf$1(other);
   return t1;
+};
+
+$._MainManagerStub$ = function() {
+  return new $._MainManagerStub();
 };
 
 $._FileReaderEventsImpl$ = function(_ptr) {
